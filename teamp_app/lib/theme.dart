@@ -43,8 +43,9 @@ AppBarTheme appBarTheme() {
         titleTextStyle: TextStyle(
           fontSize: 22,
           // fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 70, 70, 70)
-          )
+          color: Color.fromARGB(255, 70, 70, 70),
+          ),
+          
 
       );
 }

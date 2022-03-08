@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:teamp_app/screens/homeScreen/homeScreen.dart';
 
 import '../../../components/defaultButton.dart';
 import '../../../components/svgIcons.dart';
@@ -31,7 +33,9 @@ class _SignInFormState extends State<SignInForm> {
         SizedBox(height: getScreenHeight(25),),
         //password entry field. method extracted
         passwordFormField(),
-        SizedBox(height: getScreenHeight(40),),
+        SizedBox(height: getScreenHeight(10),),
+        //FormErros(),
+        SizedBox(height: getScreenHeight(10),),
         Row(
           children: [
             Checkbox(
@@ -41,11 +45,11 @@ class _SignInFormState extends State<SignInForm> {
               rememberMe = value!;
             });}
             ),
-            Text("Remember Me"),
+            Text("Remember Me", style: TextStyle(fontSize: getScreenWidth(14)),),
             Spacer(),
             GestureDetector(
               onTap: () => Navigator.popAndPushNamed(context, ForgotPasswordScreen.routeName),
-              child: Text("Forgot Password", style: TextStyle(decoration: TextDecoration.underline, color: Color.fromARGB(255, 106, 150, 224)))),
+              child: Text("Forgot Password", style: TextStyle(decoration: TextDecoration.underline, color: Color.fromARGB(255, 127, 164, 228)))),
           ],
         ),
         SizedBox(height: getScreenHeight(10),),
@@ -57,27 +61,20 @@ class _SignInFormState extends State<SignInForm> {
             pressed: (){
               if (formKey.currentState!.validate()){
                 formKey.currentState!.save();
-                //Navigator.pushNamed(context, routeName)
+                Navigator.pushNamed(context, HomeScreen.routeName);
               }
             },
             ),
         ),
-      //   TextButton(
-      //   style: ButtonStyle(
-      //     backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 34, 141, 52)),
-      //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-      //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(25))
-      //     ),
-      //   ),
-      //   onPressed: (){},
-      // child: Text("Login", style: TextStyle(fontSize: getScreenWidth(17), color: Colors.white,)),
-      // ),
       ]),
     );
   }
 
   TextFormField passwordFormField() {
     return TextFormField(
+        onSaved: (values){
+            //----To save the value entered once it has logged in
+        },
         obscureText: true,
         decoration: InputDecoration(
           labelStyle: TextStyle(fontSize: 16),
@@ -93,6 +90,13 @@ class _SignInFormState extends State<SignInForm> {
   TextFormField emailFormField() {
     return TextFormField(
         keyboardType: TextInputType.emailAddress,
+        validator: (value){
+          if (value!.isEmpty){
+            setState(() {
+              errors.add("Please Enter Your Email");
+            });
+          }
+        },
         onChanged: (value){
           // TODO
           //------------------Review the various form field errors(17.54)---------------------------
@@ -107,11 +111,12 @@ class _SignInFormState extends State<SignInForm> {
           labelStyle: TextStyle(fontSize: 16),
           hintStyle: TextStyle(fontSize: 14),
           labelText: "Email",
-          hintText: "Enter Your Email",
+          hintText: "Enter Your Email address",
           floatingLabelBehavior: FloatingLabelBehavior.always,
           suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/Mail.svg",)
         ),
       );
   }
 }
+
 

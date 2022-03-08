@@ -14,14 +14,14 @@ class OnboardContent extends StatelessWidget {
     return Column(
       children: [
         Spacer(),
-        Text("GREEN APP",
+        Text("APP NAME",
             style: TextStyle(
               fontSize: getScreenWidth(36),
               color: appPrimaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),
-        Text(text!, textAlign: TextAlign.center,),
+        Text(text!, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey)),
         Spacer(),
         // Image.asset("assets\images\splash_1.png",
         // height: 265,

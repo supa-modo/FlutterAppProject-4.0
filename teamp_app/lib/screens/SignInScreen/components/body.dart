@@ -3,7 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:teamp_app/components/defaultButton.dart';
 import 'package:teamp_app/constants.dart';
 import 'package:teamp_app/screens/forgotPasswordSreen/forgotPassword.dart';
-import 'package:teamp_app/screens/signUpScreen/signUp.dart';
+import 'package:teamp_app/screens/signUpScreen2/signUp.dart';
+import 'package:teamp_app/screens/signUpscreen1/signUpscreen1.dart';
 
 import '../../../components/errors.dart';
 import '../../../components/socMediaIcons.dart';
@@ -102,7 +103,7 @@ class NoAccountTxt extends StatelessWidget {
         ),
         GestureDetector(
             onTap:
-                () => Navigator.popAndPushNamed(context, SignUpScreen.routeName), 
+                () => Navigator.popAndPushNamed(context, SignUpScreen1.routeName), 
             child: Text(
               "Sign Up ",
               style: TextStyle(

@@ -1,18 +1,19 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:teamp_app/screens/SignInScreen/components/body.dart';
+import 'package:teamp_app/screens/signUpscreen1/components/body.dart';
 
 import '../../constants.dart';
 
-
-class SignInScreen extends StatelessWidget {
-  static String routeName = "/signIn";
-  const SignInScreen({ Key? key }) : super(key: key);
+class SignUpScreen1 extends StatelessWidget {
+  static String routeName = "/signUp1";
+  const SignUpScreen1({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign In"),
+        title: Text("Sign Up",),
         centerTitle: true,
         leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: appPrimaryColor),
         onPressed: (){
@@ -21,7 +22,6 @@ class SignInScreen extends StatelessWidget {
         ),
       ),
       body: Body(),
-
     );
   }
 }
