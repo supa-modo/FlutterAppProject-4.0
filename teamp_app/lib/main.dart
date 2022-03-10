@@ -4,7 +4,7 @@ import 'package:teamp_app/constants.dart';
 import 'package:teamp_app/routes.dart';
 import 'package:teamp_app/screens/SignInScreen/signInScreen.dart';
 import 'package:teamp_app/screens/onBoardingScreen/onboardingScreen.dart';
-import 'package:teamp_app/screens/profile/profileScreen.dart';
+import 'package:teamp_app/screens/profileScreen/profileScreen.dart';
 import 'package:teamp_app/theme.dart';
 
 void main() {

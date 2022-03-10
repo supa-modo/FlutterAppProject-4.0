@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:teamp_app/screens/homeScreen/components/productsPgView.dart';
 import 'package:teamp_app/screens/homeScreen/components/searchfield.dart';
-import 'package:teamp_app/screens/profile/profileScreen.dart';
+import 'package:teamp_app/screens/profileScreen/profileScreen.dart';
 import 'package:teamp_app/sizeConfig.dart';
 
 import '../../../components/counterIconButton.dart';
@@ -28,17 +28,16 @@ class Body extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               searchField(),
-              counterIconButton(
-                pressed: () {},
-                svgSrc: "assets/icons/Cart Icon.svg",
-                numberOfItems: 8,
-              ),
+              // counterIconButton(
+              //   pressed: () {},
+              //   svgSrc: "assets/icons/Cart Icon.svg",
+              //   numberOfItems: 8,
+              // ),
               counterIconButton(
                 pressed: () {
                   Navigator.pushNamed(context, ProfileScreen.routeName);
                 },
                 svgSrc: "assets/icons/User.svg",
-                numberOfItems: 2,
               ),
             ],
           ),
@@ -52,11 +51,15 @@ class Body extends StatelessWidget {
         //---------------------------------------------------------------------------------------------------
         //13.00 check flutter way
         SizedBox(height: getScreenHeight(10)),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: getScreenWidth(25)),
-          child: DefaultButton(
-            text: "Become A Seller",
-            pressed: () {},
+        Container(
+          height: getScreenHeight(52),
+          width: getScreenWidth(400),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(30), vertical: getScreenHeight(2)),
+            child: DefaultButton(
+              text: "Sell Your Product",
+              pressed: () {},
+            ),
           ),
         ),
         SizedBox(height: getScreenHeight(10)),

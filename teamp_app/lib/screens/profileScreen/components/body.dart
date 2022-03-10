@@ -26,8 +26,8 @@ class Body extends StatelessWidget {
           text: "My Account",
           pressed: (){},
         ),ProfileMenu(
-          icon: "assets/icons/User Icon.svg",
-          text: "My Account",
+          icon: "assets/icons/Question mark.svg",
+          text: "Get Help",
           pressed: (){},
         ),
         ProfileMenu(

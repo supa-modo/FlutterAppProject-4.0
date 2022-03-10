@@ -52,6 +52,7 @@ class _SignInFormState extends State<SignInForm> {
               child: Text("Forgot Password", style: TextStyle(decoration: TextDecoration.underline, color: Color.fromARGB(255, 127, 164, 228)))),
           ],
         ),
+        
         SizedBox(height: getScreenHeight(10),),
         //errorsForm(errors: errors),
         Padding(

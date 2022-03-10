@@ -82,11 +82,11 @@ class _SignUpForm1State extends State<SignUpForm1> {
             decoration: InputDecoration(
                 labelStyle: TextStyle(fontSize: 16),
                 hintStyle: TextStyle(fontSize: 14),
-                labelText: "Address Details",
+                labelText: "Address",
                 hintText: "Enter your location Details",
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 suffixIcon: CustomSuffixIcon(
-                  svgIcon: "assets/icons/Lock.svg",
+                  svgIcon: "assets/icons/Location point.svg",
                 )),
           ),
           SizedBox(

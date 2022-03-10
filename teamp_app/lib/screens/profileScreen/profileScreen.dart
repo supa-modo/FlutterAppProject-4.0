@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:teamp_app/screens/homeScreen/components/body.dart';
-import 'package:teamp_app/screens/profileScreen/profileScreen.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../constants.dart';
 import '../../sizeConfig.dart';
+import '../homeScreen/homeScreen.dart';
+import 'components/body.dart';
 
-class HomeScreen extends StatelessWidget {
-  static String routeName = "/homeScreen";
-  const HomeScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatelessWidget {
+  static String routeName = "/profileScreen";
+  const ProfileScreen({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Profile"),
+        centerTitle: true,
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: appPrimaryColor),
+        onPressed: (){
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Body(),
       bottomNavigationBar: Container(
         padding: EdgeInsets.symmetric(vertical: 4),
