@@ -26,6 +26,6 @@ const String invalidEmailEnteredError = "Please Enter Valid Email";
 const String nullPasswordError = "Please Enter your password";
 const String shortPasswordError = "Password is too short";
 const String passwordsMatchError = "Passwords don't match";
-const String noNam = "Please Enter your name";
+const String nullName = "Please Enter your name";
 const String nullPhoneNumberError = "Please Enter your phone number";
 const String nullAddressError = "Please Enter your address";

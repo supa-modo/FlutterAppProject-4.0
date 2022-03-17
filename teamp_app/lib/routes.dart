@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:teamp_app/screens/ImageViewScreen/imageView.dart';
 import 'package:teamp_app/screens/SignInScreen/signInScreen.dart';
 import 'package:teamp_app/screens/forgotPasswordSreen/forgotPassword.dart';
 import 'package:teamp_app/screens/homeScreen/homeScreen.dart';
@@ -15,4 +16,5 @@ final Map<String, WidgetBuilder> routes = {
   SignUpScreen2.routeName: (context) => SignUpScreen2(),
   HomeScreen.routeName: (context) => HomeScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
+  ImageViewScreen.routeName: (context) => ImageViewScreen(),
 };

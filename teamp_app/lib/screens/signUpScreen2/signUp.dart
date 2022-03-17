@@ -11,13 +11,13 @@ class SignUpScreen2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Sign Up",
           textAlign: TextAlign.center,
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: appPrimaryColor),
+          icon: const Icon(Icons.arrow_back_ios, color: appPrimaryColor),
           onPressed: () {
             Navigator.of(context).pop();
           },

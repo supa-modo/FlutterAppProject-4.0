@@ -47,7 +47,7 @@ class _ProductPageViewState extends State<ProductPageView> {
             margin: EdgeInsets.symmetric(horizontal: getScreenWidth(4)),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Color.fromARGB(200, 153, 156, 156).withOpacity(0.8))),
+                color: const Color.fromARGB(200, 153, 156, 156).withOpacity(0.8))),
         Align(
           alignment: Alignment.bottomLeft,
           child: Container(
@@ -64,7 +64,7 @@ class _ProductPageViewState extends State<ProductPageView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Product Title", style: TextStyle(fontWeight: FontWeight.bold, fontSize: getScreenWidth(17), color: Colors.white),),
-                  Text("more details about this product coming soon vhnvnsndvcndsncedncvdvcndsacnn", style: TextStyle(fontSize: getScreenWidth(12), color: Color.fromARGB(255, 104, 103, 103)),)
+                  Text("more details about this product coming soon vhnvnsndvcndsncedncvdvcndsacnn", style: TextStyle(fontSize: getScreenWidth(12), color: const Color.fromARGB(255, 104, 103, 103)),)
                 ]
               ),
             ),

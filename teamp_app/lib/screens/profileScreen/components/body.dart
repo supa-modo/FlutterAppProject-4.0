@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:teamp_app/screens/SignInScreen/signInScreen.dart';
 
 import '../../../constants.dart';
 import '../../../sizeConfig.dart';
+import '../../signUpScreen2/signUp.dart';
 import 'profileImage.dart';
 import 'profileMenu.dart';
 
@@ -38,7 +41,11 @@ class Body extends StatelessWidget {
         ProfileMenu(
           icon: "assets/icons/Log out.svg",
           text: "Log Out",
-          pressed: (){},
+          pressed: (){
+            FirebaseAuth.instance.signOut().then((value) {
+              Navigator.pushNamed(context, SignInScreen.routeName);
+            });
+          },
         ),
       ],
     );

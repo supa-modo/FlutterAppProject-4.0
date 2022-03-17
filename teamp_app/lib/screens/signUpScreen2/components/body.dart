@@ -27,7 +27,7 @@ class Body extends StatelessWidget {
                 "Register Account",
                 style: headingStyle,
               ),
-              Text(
+              const Text(
                 "Fill in your details to continue",
                 textAlign: TextAlign.center,
               ),

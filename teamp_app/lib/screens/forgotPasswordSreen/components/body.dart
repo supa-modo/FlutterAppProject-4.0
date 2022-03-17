@@ -75,7 +75,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
           // }
           // return null;
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelStyle: TextStyle(fontSize: 16),
           hintStyle: TextStyle(fontSize: 14),
           labelText: "Email",

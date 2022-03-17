@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
                 "Register Account",
                 style: headingStyle,
               ),
-              Text(
+              const Text(
                 "Fill in your details to continue",
                 textAlign: TextAlign.center,
               ),
@@ -79,7 +79,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
             textInputAction: TextInputAction.next,
             // TODO
             //---------------6.40 TO ADD MORE PROPERTIES AND CONDITIONS/ERROR MESSAGES --ONSAVED...--------------------
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 labelStyle: TextStyle(fontSize: 16),
                 hintStyle: TextStyle(fontSize: 14),
                 labelText: "Address",
@@ -97,7 +97,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
             obscureText: true,
             // TODO
             //---------------6.40 TO ADD MORE PROPERTIES AND CONDITIONS/ERROR MESSAGES --ONSAVED...--------------------
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 labelStyle: TextStyle(fontSize: 16),
                 hintStyle: TextStyle(fontSize: 14),
                 labelText: "**********",
@@ -132,6 +132,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
                 text: "Continue",
                 pressed: () {
                   Navigator.popAndPushNamed(context, SignUpScreen2.routeName);
+                  // MaterialPageRoute(builder: (context) => SignUpScreen2);
                 }),
           ),
           SizedBox(
@@ -167,7 +168,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
   TextFormField phoneFormField() {
     return TextFormField(
       textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
           labelStyle: TextStyle(fontSize: 16),
           hintStyle: TextStyle(fontSize: 14),
           labelText: "Phone Number",
@@ -193,7 +194,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         }
         return null;
       },
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
           labelStyle: TextStyle(fontSize: 16),
           hintStyle: TextStyle(fontSize: 14),
           labelText: "First Name",
@@ -219,7 +220,7 @@ class _SignUpForm1State extends State<SignUpForm1> {
         }
         return null;
       },
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         labelStyle: TextStyle(fontSize: 16),
         hintStyle: TextStyle(fontSize: 14),
         labelText: "Other Names",

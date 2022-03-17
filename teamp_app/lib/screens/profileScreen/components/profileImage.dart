@@ -14,7 +14,7 @@ class profileImage extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none, fit: StackFit.expand,
         children: [
-          CircleAvatar(backgroundColor: Color.fromARGB(255, 58, 172, 73)), //AssetImage("assets/images/Profile Image.png"),),
+          const CircleAvatar(backgroundColor: Color.fromARGB(255, 58, 172, 73)), //AssetImage("assets/images/Profile Image.png"),),
           Positioned(
             bottom: 0,
             right: -10,
@@ -23,9 +23,9 @@ class profileImage extends StatelessWidget {
               child: TextButton(
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.zero),
-                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFF5F6F9)),
+                  backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFFF5F6F9)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50), side: BorderSide(color: Colors.white))),
+                            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50), side: const BorderSide(color: Colors.white))),
                 ),
                 onPressed: (){},
                 child: SvgPicture.asset("assets/icons/Camera Icon.svg"),

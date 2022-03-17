@@ -21,7 +21,7 @@ class OnboardContent extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-        Text(text!, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey)),
+        Text(text!, textAlign: TextAlign.center, style: const TextStyle(color: Colors.grey)),
         Spacer(),
         // Image.asset("assets\images\splash_1.png",
         // height: 265,

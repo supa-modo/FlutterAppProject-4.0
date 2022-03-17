@@ -14,9 +14,9 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: const Text("Profile"),
         centerTitle: true,
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: appPrimaryColor),
+        leading: IconButton(icon: const Icon(Icons.arrow_back_ios, color: appPrimaryColor),
         onPressed: (){
             Navigator.of(context).pop();
           },
@@ -24,8 +24,8 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: Body(),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(vertical: 4),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        decoration: const BoxDecoration(
           color: Color.fromARGB(73, 230, 228, 228),
 
           // boxShadow: BoxShadow(offset: Offset(0, -15))
@@ -39,7 +39,9 @@ class ProfileScreen extends StatelessWidget {
                       color: appPrimaryColor),
                   onPressed: () {}),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, HomeScreen.routeName);
+                  },
                   icon: Icon(
                     Icons.home,
                     color: appPrimaryColor,
@@ -47,7 +49,7 @@ class ProfileScreen extends StatelessWidget {
                   )),
               IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, HomeScreen.routeName);
+                    
                   },
                   icon: Icon(
                     Icons.notifications,

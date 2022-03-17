@@ -73,7 +73,7 @@ class _BodyState extends State<Body> {
             flex: 3,
             child: PageView.builder(
               itemBuilder: (context, index) 
-              => OnboardContent(
+              => const OnboardContent(
                 text: "Welcome to myApp...",
               ),
             ),

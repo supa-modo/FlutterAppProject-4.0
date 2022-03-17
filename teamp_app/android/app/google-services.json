@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "95265424882",
+    "project_id": "greenapp-d1c96",
+    "storage_bucket": "greenapp-d1c96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95265424882:android:2164828beac8ed8c8dd76b",
+        "android_client_info": {
+          "package_name": "com.example.teamp_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95265424882-hri3s9aoh97ii6o7hgenmjth0899coqo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.teamp_app",
+            "certificate_hash": "ac4b610631335fad90f4f5ebb82c9e1445cf9379"
+          }
+        },
+        {
+          "client_id": "95265424882-584v8m75fg0jlkl0mjriclphehpfvk3c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCansUTGkBvvVB-j3aygNdBOEMJyGs1zFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95265424882-584v8m75fg0jlkl0mjriclphehpfvk3c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

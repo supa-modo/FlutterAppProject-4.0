@@ -12,7 +12,7 @@ import '../../../sizeConfig.dart';
 import 'signInForm.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +32,12 @@ class Body extends StatelessWidget {
                   "Welcome Back",
                   style: TextStyle(
                     // color: Colors.black,
-                    color: Color.fromARGB(255, 34, 141, 52),
+                    color: const Color.fromARGB(255, 34, 141, 52),
                     fontSize: getScreenWidth(28),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
+                const Text(
                   "Sign In with your email and password",
                   textAlign: TextAlign.center,
                   //style: TextStyle(color: Color.fromARGB(255, 34, 141, 52)),
@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
 
                 // SizedBox(height: getScreenHeight(40),),
 
-                Text(
+                const Text(
                   "or \nContinue with your social media account",
                   textAlign: TextAlign.center,
                 ),

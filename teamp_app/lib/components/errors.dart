@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:teamp_app/sizeConfig.dart';
 
-class errorsForm extends StatelessWidget {
-  const errorsForm({
+import '../sizeConfig.dart';
+
+class Errors extends StatelessWidget {
+  const Errors({
     Key? key,
     required this.errors,
   }) : super(key: key);
@@ -13,21 +15,23 @@ class errorsForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: List.generate(errors.length, (index) => errorsMethod(error: errors[index])),
+      children: List.generate(errors.length, (index) => formErrors(error: errors[index])),
     );
   }
 
-  Row errorsMethod({String? error}) {
+  Row formErrors({String? error}) {
     return Row(
         children: [
           SvgPicture.asset(
-            "assets/icons/Error.svg", height: getScreenHeight(14), width: getScreenWidth(14),),
-          SizedBox(
-            width: getScreenHeight(12),
-          ),
-          Text(error!),
-
+            "assets/icons/Error.svg", 
+            height: getScreenHeight(12), 
+            width: getScreenWidth(12)
+            ),
+          SizedBox(width: getScreenWidth(10)),
+          Text(error!)
         ],
       );
   }
 }
+
+

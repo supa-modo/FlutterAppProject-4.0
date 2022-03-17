@@ -4,7 +4,7 @@ import '../constants.dart';
 
   Container sliderDots() {
     return Container(
-              margin: EdgeInsets.only(right: 5),
+              margin: const EdgeInsets.only(right: 5),
               height: 6,
               width: 6,
               decoration: BoxDecoration(

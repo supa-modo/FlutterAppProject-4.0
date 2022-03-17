@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:teamp_app/net/flutterfire.dart';
 
 import '../../components/defaultButton.dart';
 import '../../components/socMediaIcons.dart';
@@ -8,13 +10,19 @@ import '../../sizeConfig.dart';
 import '../homeScreen/homeScreen.dart';
 
 class SignUpForm extends StatefulWidget {
-  const SignUpForm({Key? key}) : super(key: key);
+  SignUpForm({Key? key}) : super(key: key);
+
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();
 }
 
 class _SignUpFormState extends State<SignUpForm> {
+
+  TextEditingController _emailField = TextEditingController();
+  TextEditingController _passwordField = TextEditingController();
+  TextEditingController _confirmPasswordField = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
   late String email;
   late String password;
@@ -38,11 +46,12 @@ class _SignUpFormState extends State<SignUpForm> {
             height: getScreenHeight(25),
           ),
           TextFormField(
+            controller: _confirmPasswordField,
             obscureText: true,
             textInputAction: TextInputAction.done,
             // TODO
             //---------------6.40 TO ADD MORE PROPERTIES AND CONDITIONS/ERROR MESSAGES --ONSAVED...--------------------
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 labelStyle: TextStyle(fontSize: 16),
                 hintStyle: TextStyle(fontSize: 14),
                 labelText: "Confirm Password",
@@ -55,7 +64,7 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(
             height: getScreenHeight(40),
           ),
-        Text("**By pressing the Register button you agree to our terms and conditions**", style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic), textAlign: TextAlign.center,),
+        const Text("**By pressing the Register button you agree to our terms and conditions**", style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic), textAlign: TextAlign.center,),
           SizedBox(
             height: getScreenHeight(20),
           ),
@@ -63,17 +72,22 @@ class _SignUpFormState extends State<SignUpForm> {
             padding: EdgeInsets.symmetric(horizontal: getScreenWidth(60)),
             child: DefaultButton(
               text: "Register",
-              pressed: () {
+              pressed: () async{
+                bool shouldNavigate = await signUp(_emailField.text, _passwordField.text, _confirmPasswordField.text);
+                if(shouldNavigate){
+                  Navigator.pushNamed(context, HomeScreen.routeName);
+                }
+                //FirebaseAuth.instance.createUserWithEmailAndPassword(email: , password: password)
                 // TODO
                 //--------------------------pending conditions for moving to next screen/ backend validation and sending to database etc-----------------------------------------------------------------------------
-                Navigator.pushNamed(context, HomeScreen.routeName);
+                
               },
             ),
           ),
           SizedBox(
             height: getScreenHeight(20),
           ),
-          Text("or \nsignup with your social media account",
+          const Text("or \nsignup with your social media account",
               textAlign: TextAlign.center),
           SizedBox(
             height: getScreenHeight(20),
@@ -102,10 +116,11 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField passwordFormField() {
     return TextFormField(
+      controller: _passwordField,
       onSaved: (values){},
       textInputAction: TextInputAction.next,
       obscureText: true,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
           labelStyle: TextStyle(fontSize: 16),
           hintStyle: TextStyle(fontSize: 14),
           labelText: "Password",
@@ -119,6 +134,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField emailFormField() {
     return TextFormField(
+      controller: _emailField,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
       onSaved: (value){},
@@ -132,7 +148,7 @@ class _SignUpFormState extends State<SignUpForm> {
         }
         return null;
       },
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
           labelStyle: TextStyle(fontSize: 16),
           hintStyle: TextStyle(fontSize: 14),
           labelText: "Email",

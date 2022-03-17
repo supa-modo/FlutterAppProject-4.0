@@ -21,7 +21,7 @@ class socMediaIcon extends StatelessWidget {
         height: getScreenHeight(40), 
         width: getScreenWidth(40),
         padding: EdgeInsets.all(getScreenWidth(12)),
-        decoration: BoxDecoration(color: Color(0xFFF5F6F8), shape: BoxShape.circle),
+        decoration: const BoxDecoration(color: Color(0xFFF5F6F8), shape: BoxShape.circle),
         child: SvgPicture.asset(icon!),
         ),
     );

@@ -18,7 +18,7 @@ class DefaultButton extends StatelessWidget {
       height: getScreenHeight(56),
       child: TextButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 34, 141, 52)),
+          backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 34, 141, 52)),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(25))
           ),

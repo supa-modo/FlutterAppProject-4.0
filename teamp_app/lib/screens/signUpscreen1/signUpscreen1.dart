@@ -13,9 +13,9 @@ class SignUpScreen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up",),
+        title: const Text("Sign Up",),
         centerTitle: true,
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: appPrimaryColor),
+        leading: IconButton(icon: const Icon(Icons.arrow_back_ios, color: appPrimaryColor),
         onPressed: (){
             Navigator.of(context).pop();
           },

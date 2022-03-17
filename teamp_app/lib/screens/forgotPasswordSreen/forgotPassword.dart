@@ -13,7 +13,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         //title: Text("Forgot Password", textAlign: TextAlign.center, style: TextStyle(fontSize: getScreenWidth(19)),)
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios, color: appPrimaryColor),
+        leading: IconButton(icon: const Icon(Icons.arrow_back_ios, color: appPrimaryColor),
         onPressed: (){
             Navigator.of(context).pop();
           },

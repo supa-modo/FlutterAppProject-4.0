@@ -25,7 +25,7 @@ class counterIconButton extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(getScreenWidth(10)),
           width: getScreenWidth(37), height: getScreenWidth(37),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color.fromARGB(132, 179, 180, 184),
             //borderRadius: BorderRadius.circular(14),
             shape: BoxShape.circle,
@@ -41,7 +41,7 @@ class counterIconButton extends StatelessWidget {
             height: getScreenHeight(16), width: getScreenWidth(16), 
             decoration: BoxDecoration(
               // color: Color.fromARGB(255, 247, 101, 101),
-              color: Color.fromARGB(193, 34, 141, 52),
+              color: const Color.fromARGB(193, 34, 141, 52),
               shape: BoxShape.circle,
               border: Border.all(width: 1.5, color: Colors.white),
             ),
