@@ -28,7 +28,7 @@ class Errors extends StatelessWidget {
             width: getScreenWidth(12)
             ),
           SizedBox(width: getScreenWidth(10)),
-          Text(error!)
+          Text(error!, style: TextStyle(color: Color.fromARGB(179, 231, 70, 70), fontSize: getScreenWidth(12)))
         ],
       );
   }

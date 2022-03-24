@@ -43,7 +43,7 @@ class _SignInFormState extends State<SignInForm> {
         passwordFormField(),
         SizedBox(height: getScreenHeight(10),),
         Errors(errors: errors),
-        SizedBox(height: getScreenHeight(15),),
+        SizedBox(height: getScreenHeight(3),),
         Row(
           children: [
             Checkbox(
@@ -56,14 +56,15 @@ class _SignInFormState extends State<SignInForm> {
             Text("Remember Me", style: TextStyle(fontSize: getScreenWidth(14)),),
             const Spacer(),
             GestureDetector(
-              onTap: () => Navigator.popAndPushNamed(context, ForgotPasswordScreen.routeName),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ForgotPasswordScreen())),
+              //onTap: () => Navigator.popAndPushNamed(context, ForgotPasswordScreen.routeName),
               child: const Text("Forgot Password", style: TextStyle(decoration: TextDecoration.underline, color: Color.fromARGB(255, 127, 164, 228)))),
           ],
         ),
         
         SizedBox(height: getScreenHeight(10),),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: getScreenWidth(55)),
+          padding: EdgeInsets.symmetric(horizontal: getScreenWidth(63)),
           child: DefaultButton(
             text: "Login",
             pressed: (){ //async{
@@ -78,6 +79,7 @@ class _SignInFormState extends State<SignInForm> {
       ]),
     );
   }
+
 
   TextFormField passwordFormField() {
     return TextFormField(
@@ -110,8 +112,8 @@ class _SignInFormState extends State<SignInForm> {
         },
         obscureText: true,
         decoration: const InputDecoration(
-          labelStyle: TextStyle(fontSize: 16),
-          hintStyle: TextStyle(fontSize: 14),
+          labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+          hintStyle: TextStyle(fontSize: 13),
           labelText: "Password",
           hintText: "Enter Your Password",
           floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -132,7 +134,7 @@ class _SignInFormState extends State<SignInForm> {
             setState(() {
               errors.add(nullEmailError);
             });
-          } else if(!emailValidatorRegExp.hasMatch(value)){
+          } else if(!emailValidatorRegExp.hasMatch(value) && !errors.contains(invalidEmailEnteredError)){
             setState(() {
               errors.add(invalidEmailEnteredError);
             });
@@ -141,11 +143,11 @@ class _SignInFormState extends State<SignInForm> {
           
         },
         onChanged: (value){
-          if (value.isEmpty && errors.contains(nullEmailError)){
+          if (value.isNotEmpty && errors.contains(nullEmailError)){
             setState(() {
               errors.remove(nullEmailError);
             });
-          } else if(emailValidatorRegExp.hasMatch(value)){
+          } else if(emailValidatorRegExp.hasMatch(value) && errors.contains(invalidEmailEnteredError)){
             setState(() {
               errors.remove(invalidEmailEnteredError);
             });
@@ -154,8 +156,8 @@ class _SignInFormState extends State<SignInForm> {
         },
           // TODO
         decoration: const InputDecoration(
-          labelStyle: TextStyle(fontSize: 16),
-          hintStyle: TextStyle(fontSize: 14),
+          labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+          hintStyle: TextStyle(fontSize: 13),
           labelText: "Email",
           hintText: "Enter Your Email address",
           floatingLabelBehavior: FloatingLabelBehavior.always,

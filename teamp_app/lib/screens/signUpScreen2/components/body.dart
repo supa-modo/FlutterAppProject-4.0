@@ -22,7 +22,7 @@ class Body extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: SizeConfig.screenHeight! * 0.07),
+              SizedBox(height: SizeConfig.screenHeight! * 0.0005),
               Text(
                 "Register Account",
                 style: headingStyle,

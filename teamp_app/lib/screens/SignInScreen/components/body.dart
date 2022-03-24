@@ -26,7 +26,7 @@ class Body extends StatelessWidget {
               children: [
                 // SizedBox(height: getScreenHeight(65),),
                 SizedBox(
-                  height: SizeConfig.screenHeight! * 0.05,
+                  height: SizeConfig.screenHeight! * 0.06,
                 ),
                 Text(
                   "Welcome Back",
@@ -37,19 +37,21 @@ class Body extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(height: getScreenHeight(10)),
                 const Text(
-                  "Sign In with your email and password",
+                  "Sign In with your registered email address and password to continue",
                   textAlign: TextAlign.center,
                   //style: TextStyle(color: Color.fromARGB(255, 34, 141, 52)),
                 ),
-                SizedBox(height: SizeConfig.screenHeight! * 0.10),
+                SizedBox(height: SizeConfig.screenHeight! * 0.06),
                 SignInForm(),
-                SizedBox(height: SizeConfig.screenHeight! * 0.05),
+                SizedBox(height: SizeConfig.screenHeight! * 0.04),
+                
 
                 // SizedBox(height: getScreenHeight(40),),
 
                 const Text(
-                  "or \nContinue with your social media account",
+                  "or \nLogin with your social media account",
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
@@ -74,7 +76,7 @@ class Body extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: getScreenHeight(30),
+                  height: getScreenHeight(40),
                 ),
 
                 NoAccountTxt()
@@ -103,7 +105,7 @@ class NoAccountTxt extends StatelessWidget {
         ),
         GestureDetector(
             onTap:
-                () => Navigator.popAndPushNamed(context, SignUpScreen1.routeName), 
+                () => Navigator.popAndPushNamed(context, SignUpScreen2.routeName),
             child: Text(
               "Sign Up ",
               style: TextStyle(

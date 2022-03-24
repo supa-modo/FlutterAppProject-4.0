@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:teamp_app/net/flutterfire.dart';
 
 import '../../components/defaultButton.dart';
+import '../../components/errors.dart';
 import '../../components/socMediaIcons.dart';
 import '../../components/svgIcons.dart';
 import '../../constants.dart';
@@ -20,10 +21,14 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
 
   TextEditingController _emailField = TextEditingController();
+  TextEditingController _nameField = TextEditingController();
+  TextEditingController _phoneNumberField = TextEditingController();
   TextEditingController _passwordField = TextEditingController();
   TextEditingController _confirmPasswordField = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
+  late String name;
+  late String phoneNumber;
   late String email;
   late String password;
   late String confirmPassword;
@@ -32,28 +37,42 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: Column(
         children: [
           SizedBox(
-            height: getScreenHeight(40),
+            height: getScreenHeight(30),
+          ),
+          nameFormField(),
+          SizedBox(
+            height: getScreenHeight(15),
           ),
           emailFormField(),
           SizedBox(
-            height: getScreenHeight(25),
+            height: getScreenHeight(15),
+          ),
+          phoneFormField(),
+          SizedBox(
+            height: getScreenHeight(15),
           ),
           passwordFormField(),
           SizedBox(
-            height: getScreenHeight(25),
+            height: getScreenHeight(15),
           ),
           TextFormField(
             controller: _confirmPasswordField,
             obscureText: true,
-            textInputAction: TextInputAction.done,
             // TODO
-            //---------------6.40 TO ADD MORE PROPERTIES AND CONDITIONS/ERROR MESSAGES --ONSAVED...--------------------
+            //---------------------ADD PASSWORD MATCHING CONFIRMATION-----------------------------------
+            // validator: (value) {
+            //   if(value == passwordFormField(value)){
+            //     errors.add(value)
+            //   }
+            // },
+            textInputAction: TextInputAction.done,
             decoration: const InputDecoration(
-                labelStyle: TextStyle(fontSize: 16),
-                hintStyle: TextStyle(fontSize: 14),
+                labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+                hintStyle: TextStyle(fontSize: 13),
                 labelText: "Confirm Password",
                 hintText: "Confirm Your Password",
                 floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -62,21 +81,29 @@ class _SignUpFormState extends State<SignUpForm> {
                 )),
           ),
           SizedBox(
-            height: getScreenHeight(40),
+            height: getScreenHeight(25),
+          ),
+          Errors(errors: errors),
+          SizedBox(
+            height: getScreenHeight(5),
           ),
         const Text("**By pressing the Register button you agree to our terms and conditions**", style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic), textAlign: TextAlign.center,),
           SizedBox(
-            height: getScreenHeight(20),
+            height: getScreenHeight(15),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(60)),
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(75)),
             child: DefaultButton(
               text: "Register",
-              pressed: () async{
-                bool shouldNavigate = await signUp(_emailField.text, _passwordField.text, _confirmPasswordField.text);
-                if(shouldNavigate){
+              pressed: () {//async{
+                //bool shouldNavigate = await signUp(_emailField.text, _passwordField.text, _confirmPasswordField.text);
+                if(formKey.currentState!.validate()){//shouldNavigate && formKey.currentState!.validate()){
+                  formKey.currentState!.save();
                   Navigator.pushNamed(context, HomeScreen.routeName);
                 }
+                // } else{
+                //   SnackBar(content: Text("Please fix the errors first"));
+                // }
                 //FirebaseAuth.instance.createUserWithEmailAndPassword(email: , password: password)
                 // TODO
                 //--------------------------pending conditions for moving to next screen/ backend validation and sending to database etc-----------------------------------------------------------------------------
@@ -85,9 +112,9 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
           ),
           SizedBox(
-            height: getScreenHeight(20),
+            height: getScreenHeight(15),
           ),
-          const Text("or \nsignup with your social media account",
+          const Text("or \nSignup with your social media account",
               textAlign: TextAlign.center),
           SizedBox(
             height: getScreenHeight(20),
@@ -117,12 +144,36 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField passwordFormField() {
     return TextFormField(
       controller: _passwordField,
-      onSaved: (values){},
+      onSaved: (newValue) => password = newValue!,
+        validator: (value) {
+          if (value!.isEmpty && !errors.contains(nullPasswordError)){
+            setState(() {
+              errors.add(nullPasswordError);
+            });
+          } else if(value.length < 8 && !errors.contains(shortPasswordError)){
+            setState(() {
+              errors.add(shortPasswordError);
+            });
+          }
+          return null;
+        },
+        onChanged: (value) {
+          if (value.isNotEmpty && errors.contains(nullPasswordError)){
+            setState(() {
+              errors.remove(nullPasswordError);
+            });
+          } else if(value.length >= 8 && errors.contains(shortPasswordError)){
+            setState(() {
+              errors.remove(shortPasswordError);
+            });
+          }
+          return null;
+        },
       textInputAction: TextInputAction.next,
       obscureText: true,
       decoration: const InputDecoration(
-          labelStyle: TextStyle(fontSize: 16),
-          hintStyle: TextStyle(fontSize: 14),
+          labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+          hintStyle: TextStyle(fontSize: 13),
           labelText: "Password",
           hintText: "Enter Your Password",
           floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -137,20 +188,35 @@ class _SignUpFormState extends State<SignUpForm> {
       controller: _emailField,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
-      onSaved: (value){},
-      onChanged: (value) {
-        // TODO
-        //------------------Review the various form field errors(17.54)---------------------------
-        if (value.isEmpty && !errors.contains(nullEmailError)) {
-          setState(() {
-            errors.add(nullEmailError);
-          });
-        }
-        return null;
-      },
+      onSaved: (newValue) => email = newValue!,
+      validator: (value){
+          if (value!.isEmpty && !errors.contains(nullEmailError)){
+            setState(() {
+              errors.add(nullEmailError);
+            });
+          } else if(!emailValidatorRegExp.hasMatch(value) && !errors.contains(invalidEmailEnteredError)){
+            setState(() {
+              errors.add(invalidEmailEnteredError);
+            });
+          }
+          return null;
+          
+        },
+        onChanged: (value){
+          if (value.isNotEmpty && errors.contains(nullEmailError)){
+            setState(() {
+              errors.remove(nullEmailError);
+            });
+          } else if(emailValidatorRegExp.hasMatch(value) && errors.contains(invalidEmailEnteredError)){
+            setState(() {
+              errors.remove(invalidEmailEnteredError);
+            });
+          }
+          return null;
+        },
       decoration: const InputDecoration(
-          labelStyle: TextStyle(fontSize: 16),
-          hintStyle: TextStyle(fontSize: 14),
+          labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+          hintStyle: TextStyle(fontSize: 13),
           labelText: "Email",
           hintText: "Enter Your Email address",
           floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -159,4 +225,45 @@ class _SignUpFormState extends State<SignUpForm> {
           )),
     );
   }
+
+TextFormField phoneFormField() {
+    return TextFormField(
+      controller: _phoneNumberField,
+      //----To save the value entered once it has logged in
+      onSaved: (newValue) => phoneNumber = newValue!,
+      keyboardType: TextInputType.phone,
+      textInputAction: TextInputAction.next,
+      decoration: const InputDecoration(
+          labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+          hintStyle: TextStyle(fontSize: 13),
+          labelText: "Phone Number",
+          hintText: "Enter Your Phone Number",
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          suffixIcon: CustomSuffixIcon(
+            svgIcon: "assets/icons/Phone.svg",
+          )),
+    );
+  }
+
+  TextFormField nameFormField() {
+    return TextFormField(
+      controller: _nameField,
+      //----To save the value entered once it has logged in
+      onSaved: (newValue) => name = newValue!,
+      keyboardType: TextInputType.text,
+      textInputAction: TextInputAction.next,
+      decoration: const InputDecoration(
+          labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+          hintStyle: TextStyle(fontSize: 13),
+          labelText: "Name",
+          hintText: "Enter Your Name",
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          suffixIcon: CustomSuffixIcon(
+            svgIcon: "assets/icons/User Icon.svg",
+          )),
+    );
+  }
+
 }
+
+  
