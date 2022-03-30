@@ -19,9 +19,9 @@ class sectionTitleHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(text, style: TextStyle(fontSize: getScreenWidth(18), color: const Color.fromARGB(255, 34, 141, 52))),
+          Text(text, style: TextStyle(fontSize: getScreenWidth(17), color: const Color.fromARGB(255, 34, 141, 52))),
           GestureDetector(
-            child: const Text("See More", style: TextStyle(color: Color.fromARGB(255, 114, 168, 197))),
+            child: Text("See More", style: TextStyle(color: Color.fromARGB(255, 114, 168, 197), fontSize: getScreenWidth(14))),
             onTap: pressed,
           ),
         ]
