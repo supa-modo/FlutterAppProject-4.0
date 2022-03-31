@@ -48,9 +48,8 @@ class _ItemsViewState extends State<ItemsView> {
           pressed: () {},
         ),
         // SizedBox(height: getScreenHeight(1)),
-        Container(
-          height: getScreenHeight(700),
-          child: ListView.builder(
+          ListView.builder(
+            shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: 10,
               itemBuilder: ((context, index) {
@@ -102,7 +101,7 @@ class _ItemsViewState extends State<ItemsView> {
                               children: [
                                 Icon(Icons.account_circle_rounded, color: Color.fromARGB(255, 155, 173, 182), size: getScreenWidth(16),),
                                 Text("Product Owner", style: TextStyle(fontSize: getScreenWidth(11))),
-                                
+                                SizedBox(width: getScreenWidth(15)),
                                 Icon(Icons.gps_fixed_rounded, color: Color.fromARGB(255, 155, 173, 182), size: getScreenWidth(16),),
                                 Text("Location", style: TextStyle(fontSize: getScreenWidth(11))),
                               ]
@@ -114,7 +113,6 @@ class _ItemsViewState extends State<ItemsView> {
                   ]),
                 );
               })),
-        ),
       ]),
     );
   }

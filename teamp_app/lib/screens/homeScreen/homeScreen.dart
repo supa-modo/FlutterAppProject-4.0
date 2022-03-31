@@ -7,6 +7,7 @@ import 'package:teamp_app/screens/profileScreen/profileScreen.dart';
 import '../../components/counterIconButton.dart';
 import '../../constants.dart';
 import '../../sizeConfig.dart';
+import '../productDetailsScreen/productDetailsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routeName = "/homeScreen";
@@ -65,7 +66,8 @@ class HomeScreen extends StatelessWidget {
                     size: getScreenWidth(25),
                   )),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   icon: Icon(
                     Icons.notifications,
                     color: appPrimaryColor,

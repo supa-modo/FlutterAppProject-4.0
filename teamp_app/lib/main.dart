@@ -5,6 +5,7 @@ import 'package:teamp_app/constants.dart';
 import 'package:teamp_app/routes.dart';
 import 'package:teamp_app/screens/SignInScreen/signInScreen.dart';
 import 'package:teamp_app/screens/onBoardingScreen/onboardingScreen.dart';
+import 'package:teamp_app/screens/productDetailsScreen/productDetailsScreen.dart';
 import 'package:teamp_app/screens/profileScreen/profileScreen.dart';
 import 'package:teamp_app/theme.dart';
 
@@ -25,9 +26,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: theme(),
       // home: OnboardingScreen(),
-      // home: SignInScreen(),
+      //home: ProductDetails(),
       initialRoute: OnboardingScreen.routeName,
-      // initialRoute: ProfileScreen.routeName,
+      //initialRoute: ProfileScreen.routeName,
       // initialRoute: SignInScreen.routeName,
       routes: routes,
     );
