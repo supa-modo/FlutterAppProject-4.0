@@ -67,6 +67,7 @@ class HomeScreen extends StatelessWidget {
                   )),
               IconButton(
                   onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetails()),);
                   },
                   icon: Icon(
                     Icons.notifications,

@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import '../../../components/defaultButton.dart';
 import '../../../components/sectionTitle.dart';
+import '../../../constants.dart';
 import '../../../sizeConfig.dart';
 import '../../ImageViewScreen/imageView.dart';
 
@@ -55,9 +56,9 @@ class _ItemsViewState extends State<ItemsView> {
               itemBuilder: ((context, index) {
                 return Container(
                   margin: EdgeInsets.only(
-                      left: getScreenWidth(10),
+                      left: getScreenWidth(7),
                       right: getScreenWidth(5),
-                      bottom: getScreenHeight(10)),
+                      bottom: getScreenHeight(7)),
                   child: Row(children: [
                     //image section - not loading, pending fluter clean and pub get to try and solve
                     Container(
@@ -66,12 +67,14 @@ class _ItemsViewState extends State<ItemsView> {
                         decoration: BoxDecoration(
                           borderRadius:
                               BorderRadius.circular(getScreenWidth(17)),
-                          color: Colors.redAccent,
-                          //image: DecorationImage(image: AssetImage("teamp_app/assets/images/onions.jpeg")),
-                        )),
+                          //color: Colors.redAccent,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage("assets/images/Image Banner 2.png")),
+                        ),),
                     Expanded(
                       child: Container(
-                        height: getScreenHeight(110),
+                        height: getScreenHeight(120),
                         width: getScreenWidth(165),
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 243, 243, 243),
@@ -90,20 +93,20 @@ class _ItemsViewState extends State<ItemsView> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: getScreenWidth(16),
-                                    color: Color.fromARGB(255, 105, 105, 105))),
+                                    color: appPrimaryColor)),
                             SizedBox(height: getScreenHeight(8)),
                             Text(
-                              "A little description about the product",
-                              style: TextStyle(fontSize: getScreenWidth(12)),
+                              "A little description about the product shiklisjcjncacnakc djdcnisdmds",
+                              style: TextStyle(fontSize: getScreenWidth(12), color: Color.fromARGB(255, 73, 71, 71)),
                             ),
                             SizedBox(height: getScreenHeight(10)),
                             Row(
                               children: [
                                 Icon(Icons.account_circle_rounded, color: Color.fromARGB(255, 155, 173, 182), size: getScreenWidth(16),),
-                                Text("Product Owner", style: TextStyle(fontSize: getScreenWidth(11))),
+                                Text("Product Owner", style: TextStyle(fontSize: getScreenWidth(11), color: Color.fromARGB(255, 104, 158, 252))),
                                 SizedBox(width: getScreenWidth(15)),
-                                Icon(Icons.gps_fixed_rounded, color: Color.fromARGB(255, 155, 173, 182), size: getScreenWidth(16),),
-                                Text("Location", style: TextStyle(fontSize: getScreenWidth(11))),
+                                Icon(Icons.gps_fixed_rounded, color: Color.fromARGB(255, 253, 128, 120), size: getScreenWidth(16),),
+                                Text("Location", style: TextStyle(fontSize: getScreenWidth(11), color: Color.fromARGB(255, 221, 189, 48))),
                               ]
                             )
                           ]),

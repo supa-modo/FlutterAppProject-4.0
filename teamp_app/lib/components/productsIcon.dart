@@ -11,7 +11,7 @@ class ProductIcon extends StatelessWidget {
   ProductIcon({ Key? key, 
   required this.icon, 
   this.backgroundColor = const Color(0xFFfcf4e4), 
-  this.iconColor = const Color(0xFF756d54), 
+  this.iconColor = const Color.fromARGB(255, 66, 65, 63), 
   this.size = 30,
   }) : super(key: key);
 
@@ -24,7 +24,7 @@ class ProductIcon extends StatelessWidget {
         borderRadius: BorderRadius.circular(size/2),
         color: backgroundColor,
         ),
-      child: Icon(icon, color: iconColor, size: 16),
+      child: Icon(icon, color: iconColor, size: 17),
     );
   }
 }

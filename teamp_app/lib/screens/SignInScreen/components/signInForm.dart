@@ -7,6 +7,7 @@ import '../../../components/defaultButton.dart';
 import '../../../components/errors.dart';
 import '../../../components/svgIcons.dart';
 import '../../../constants.dart';
+import '../../../net/flutterfire.dart';
 import '../../../sizeConfig.dart';
 import '../../forgotPasswordSreen/forgotPassword.dart';
 
@@ -67,11 +68,14 @@ class _SignInFormState extends State<SignInForm> {
           padding: EdgeInsets.symmetric(horizontal: getScreenWidth(63)),
           child: DefaultButton(
             text: "Login",
-            pressed: (){ //async{
-             // bool shouldNavigate = await signIn(_emailField.text, _passwordField.text,);
-                if(formKey.currentState!.validate()){//shouldNavigate && formKey.currentState!.validate()){
-                  formKey.currentState!.save();
+            pressed: ()async{
+              bool shouldNavigate = await signIn(_emailField.text, _passwordField.text,);
+                if(formKey.currentState!.validate()){
+                  if(shouldNavigate){
+                  
                   Navigator.pushNamed(context, HomeScreen.routeName);
+                }
+                  formKey.currentState!.save();
                 }
             },
             ),

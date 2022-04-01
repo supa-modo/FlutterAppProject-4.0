@@ -2,7 +2,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:teamp_app/screens/homeScreen/components/productsPgView.dart';
-import 'package:teamp_app/screens/homeScreen/components/searchfield.dart';
 import 'package:teamp_app/screens/profileScreen/profileScreen.dart';
 import 'package:teamp_app/sizeConfig.dart';
 
@@ -28,7 +27,7 @@ class Body extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  searchField(),
+                  //searchField(),
                   counterIconButton(
                     pressed: () {},
                     svgSrc: "assets/icons/User Icon.svg",

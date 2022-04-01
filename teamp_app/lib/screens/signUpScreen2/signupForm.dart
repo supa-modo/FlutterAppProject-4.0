@@ -95,11 +95,14 @@ class _SignUpFormState extends State<SignUpForm> {
             padding: EdgeInsets.symmetric(horizontal: getScreenWidth(75)),
             child: DefaultButton(
               text: "Register",
-              pressed: () {//async{
-                //bool shouldNavigate = await signUp(_emailField.text, _passwordField.text, _confirmPasswordField.text);
-                if(formKey.currentState!.validate()){//shouldNavigate && formKey.currentState!.validate()){
-                  formKey.currentState!.save();
+              pressed: () async{
+                bool shouldNavigate = await signUp(_emailField.text, _passwordField.text, _confirmPasswordField.text);
+                if(formKey.currentState!.validate()){
+                  if(shouldNavigate){
                   Navigator.pushNamed(context, HomeScreen.routeName);
+                  }
+                  formKey.currentState!.save();
+                  
                 }
                 // } else{
                 //   SnackBar(content: Text("Please fix the errors first"));
