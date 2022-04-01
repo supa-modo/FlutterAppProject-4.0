@@ -5,6 +5,7 @@ import '../../../components/sectionTitle.dart';
 import '../../../constants.dart';
 import '../../../sizeConfig.dart';
 import '../../ImageViewScreen/imageView.dart';
+import '../../productDetailsScreen/productDetailsScreen.dart';
 
 class ItemsView extends StatefulWidget {
   const ItemsView({Key? key}) : super(key: key);
@@ -24,23 +25,21 @@ class _ItemsViewState extends State<ItemsView> {
               child: Container(
                 decoration: BoxDecoration(
                     color: Colors.grey,
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage("assets/images/Vegetables.webp")),
                     borderRadius: BorderRadius.circular(getScreenWidth(18))),
               ),
-              height: getScreenHeight(250)),
+              height: getScreenHeight(225)),
         ),
-        SizedBox(height: getScreenHeight(10)),
+        SizedBox(height: getScreenHeight(5)),
         Container(
-          height: getScreenHeight(52),
+          height: getScreenHeight(102),
           width: getScreenWidth(400),
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getScreenWidth(30), vertical: getScreenHeight(2)),
-            child: DefaultButton(
-              text: "Sell Your Product",
-              pressed: () {
-                Navigator.pushNamed(context, ImageViewScreen.routeName);
-              },
-            ),
+            child: MarketPriceSellProduct(),
           ),
         ),
         SizedBox(height: getScreenHeight(10)),
@@ -70,7 +69,7 @@ class _ItemsViewState extends State<ItemsView> {
                           //color: Colors.redAccent,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage("assets/images/Image Banner 2.png")),
+                            image: AssetImage("assets/images/tomato.jpg")),
                         ),),
                     Expanded(
                       child: Container(
@@ -103,10 +102,10 @@ class _ItemsViewState extends State<ItemsView> {
                             Row(
                               children: [
                                 Icon(Icons.account_circle_rounded, color: Color.fromARGB(255, 155, 173, 182), size: getScreenWidth(16),),
-                                Text("Product Owner", style: TextStyle(fontSize: getScreenWidth(11), color: Color.fromARGB(255, 104, 158, 252))),
+                                Text("Product Owner", style: TextStyle(fontSize: getScreenWidth(11), color: Color.fromARGB(255, 221, 189, 48))),
                                 SizedBox(width: getScreenWidth(15)),
-                                Icon(Icons.gps_fixed_rounded, color: Color.fromARGB(255, 253, 128, 120), size: getScreenWidth(16),),
-                                Text("Location", style: TextStyle(fontSize: getScreenWidth(11), color: Color.fromARGB(255, 221, 189, 48))),
+                                Icon(Icons.location_pin, color: Color.fromARGB(197, 247, 64, 64), size: getScreenWidth(16),),
+                                Text("Location", style: TextStyle(fontSize: getScreenWidth(11), color: Color.fromARGB(255, 104, 158, 252))),
                               ]
                             )
                           ]),
@@ -117,6 +116,66 @@ class _ItemsViewState extends State<ItemsView> {
                 );
               })),
       ]),
+    );
+  }
+}
+
+class MarketPriceSellProduct extends StatelessWidget {
+  const MarketPriceSellProduct({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          width: getScreenWidth(300),
+          height: getScreenHeight(46),
+          child: TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 34, 141, 52)),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25))
+            ),
+          ),
+          onPressed: (){
+            // Navigator.pushNamed(context, ImageViewScreen.routeName);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ImageViewScreen()),);
+          },
+      child: Text("Sell Your Product", style: TextStyle(fontSize: getScreenWidth(17), color: Colors.white,)),
+      ),
+        ),
+        SizedBox(height: getScreenHeight(5)),
+      SizedBox(
+        width: getScreenWidth(300),
+          height: getScreenHeight(46),
+        child: TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 34, 141, 52)),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25))
+            ),
+          ),
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetails()),);
+          },
+        child: Text("Current Market Retail Prices", style: TextStyle(fontSize: getScreenWidth(17), color: Colors.white,)),
+        ),
+      ),
+        // DefaultButton(
+        //   text: "Sell Your Product",
+        //   pressed: () {
+        //     Navigator.pushNamed(context, ImageViewScreen.routeName);
+        //   },
+        // ),
+        // DefaultButton(
+        //   text: "Current Retail Market Prices",
+        //   pressed: () {
+
+        //   },
+        // )
+      ],
     );
   }
 }

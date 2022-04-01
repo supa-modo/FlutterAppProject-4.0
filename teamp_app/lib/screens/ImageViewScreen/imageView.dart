@@ -208,22 +208,25 @@ class ImageViewScreen extends StatelessWidget {
                 SizedBox(
                   height: getScreenHeight(20),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: getScreenWidth(50), vertical: getScreenHeight(2)),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Upload",
-                      style: TextStyle(
-                          fontSize: getScreenWidth(16), color: Colors.white),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color.fromARGB(255, 34, 141, 52)),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
-                      fixedSize: MaterialStateProperty.all<Size>(Size.fromWidth(200),),                      
+                SizedBox(
+                  height: getScreenHeight(52),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getScreenWidth(50), vertical: getScreenHeight(2)),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Upload",
+                        style: TextStyle(
+                            fontSize: getScreenWidth(16), color: Colors.white),
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 34, 141, 52)),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25))),
+                        fixedSize: MaterialStateProperty.all<Size>(Size.fromWidth(200),),                      
+                      ),
                     ),
                   ),
                 ),

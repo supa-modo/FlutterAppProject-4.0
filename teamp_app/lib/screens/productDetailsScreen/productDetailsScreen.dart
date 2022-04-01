@@ -24,7 +24,7 @@ class ProductDetails extends StatelessWidget {
                   //color: Colors.amberAccent,
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/Image Banner 2.png")),
+                      image: AssetImage("assets/images/tomato.jpg")),
                 ),
               )),
           Positioned(

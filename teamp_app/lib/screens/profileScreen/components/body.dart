@@ -5,6 +5,7 @@ import 'package:teamp_app/screens/SignInScreen/signInScreen.dart';
 
 import '../../../constants.dart';
 import '../../../sizeConfig.dart';
+import '../../homeScreen/homeScreen.dart';
 import '../../signUpScreen2/signUp.dart';
 import 'profileImage.dart';
 import 'profileMenu.dart';
@@ -19,6 +20,11 @@ class Body extends StatelessWidget {
         SizedBox(height: 30),
         profileImage(),
         SizedBox(height: 20),
+        ProfileMenu(
+          text: "Back to HomeScreen", 
+          icon: "assets/icons/Shop Icon.svg", 
+          pressed: (){},//Navigator.pop(context, HomeScreen.routeName)
+          ),
         ProfileMenu(
           icon: "assets/icons/User Icon.svg",
           text: "My Account",
@@ -38,6 +44,7 @@ class Body extends StatelessWidget {
           text: "Settings",
           pressed: (){},
         ),
+        
         ProfileMenu(
           icon: "assets/icons/Log out.svg",
           text: "Log Out",
