@@ -60,17 +60,20 @@ class _ItemsViewState extends State<ItemsView> {
                       bottom: getScreenHeight(7)),
                   child: Row(children: [
                     //image section - not loading, pending fluter clean and pub get to try and solve
-                    Container(
-                        width: getScreenWidth(180),
-                        height: getScreenHeight(140),
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(getScreenWidth(17)),
-                          //color: Colors.redAccent,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/images/tomato.jpg")),
-                        ),),
+                    GestureDetector(
+                      onTap: () => Navigator.push(context,  MaterialPageRoute(builder: (context) => ProductDetails())),
+                      child: Container(
+                          width: getScreenWidth(180),
+                          height: getScreenHeight(140),
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(getScreenWidth(17)),
+                            //color: Colors.redAccent,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage("assets/images/tomato.jpg")),
+                          ),),
+                    ),
                     Expanded(
                       child: Container(
                         height: getScreenHeight(120),
@@ -140,7 +143,6 @@ class MarketPriceSellProduct extends StatelessWidget {
             ),
           ),
           onPressed: (){
-            // Navigator.pushNamed(context, ImageViewScreen.routeName);
             Navigator.push(context, MaterialPageRoute(builder: (context) => ImageViewScreen()),);
           },
       child: Text("Sell Your Product", style: TextStyle(fontSize: getScreenWidth(17), color: Colors.white,)),
@@ -158,7 +160,7 @@ class MarketPriceSellProduct extends StatelessWidget {
             ),
           ),
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetails()),);
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetails()),);
           },
         child: Text("Current Market Retail Prices", style: TextStyle(fontSize: getScreenWidth(17), color: Colors.white,)),
         ),

@@ -42,8 +42,8 @@ class ProductData extends StatelessWidget {
         Row(
           
           children: [
-            Icon(Icons.account_circle, color: Color.fromARGB(255, 168, 151, 151), size: getScreenWidth(40),),
-        Text(ProductOwner, style: TextStyle(fontWeight: FontWeight.bold, fontSize: getScreenWidth(15),)),
+            Icon(Icons.account_circle, color: Color.fromARGB(255, 145, 130, 130), size: getScreenWidth(40),),
+        Text(ProductOwner, style: TextStyle(fontWeight: FontWeight.bold, fontSize: getScreenWidth(15),color: Colors.brown)),
             SizedBox(width: getScreenWidth(120)),
           ],
         ),
@@ -61,7 +61,13 @@ class ProductData extends StatelessWidget {
               ),
               
               ),
-            Text("Contact Seller: " + PhoneNumber, style: TextStyle(fontSize: getScreenWidth(13), color: Color.fromARGB(212, 27, 136, 36)),),
+            Row(
+              children: [
+                Icon(Icons.call_outlined, color: Colors.brown, size: getScreenWidth(16),),
+                SizedBox(width: getScreenWidth(3)),
+                Text("Contact Seller: " + PhoneNumber, style: TextStyle(fontSize: getScreenWidth(13), color: Color.fromARGB(212, 27, 136, 36)),),
+              ],
+            ),
           ],
         )
         

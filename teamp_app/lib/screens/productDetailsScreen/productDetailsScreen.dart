@@ -31,8 +31,11 @@ class ProductDetails extends StatelessWidget {
             top: 45,
             left: 20,
             // right: 20,
-            child: ProductIcon(
-              icon: Icons.arrow_back_ios_new,
+            child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: ProductIcon(
+                icon: Icons.arrow_back_ios_new,
+              ),
             ),
           ),
           Positioned(

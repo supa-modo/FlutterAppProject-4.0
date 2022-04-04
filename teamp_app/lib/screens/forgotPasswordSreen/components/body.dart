@@ -5,6 +5,7 @@ import 'package:teamp_app/sizeConfig.dart';
 
 import '../../../components/svgIcons.dart';
 import '../../../constants.dart';
+import '../../homeScreen/homeScreen.dart';
 
 class Body extends StatelessWidget {
   //TODO
@@ -91,6 +92,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
           child: DefaultButton(
             text: "Continue",
             pressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()),);
               // if (formKey.currentState.validate()){
               //   // TODO
               //   //TO ADD WHAT HAPPENS WHEN THE CONTINUE BUTTONS IS TAPPED. POSTPONED FOR NOW
