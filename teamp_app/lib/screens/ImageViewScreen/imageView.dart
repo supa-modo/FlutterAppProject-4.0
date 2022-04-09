@@ -351,7 +351,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                         vertical: getScreenHeight(2)),
                     child: TextButton(
                       onPressed: () {
-                        validateAndUpload();
+                        
                       },
                       child: Text(
                         "Upload",
@@ -379,27 +379,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
         ));
   }
 
-  void validateAndUpload() async{
-    if(_formKey.currentState!.validate()){
-      if(_image != null){
-        if(_productNameField != null && _productPriceField != null && _nearestLocationField != null){
-          String imageUrl;
-          final FirebaseStorage storage = FirebaseStorage.instance;
-          final String picture = "${DateTime.now().millisecondsSinceEpoch.toString()}.jpg";
-          // StorageUploadTask task = storage.ref().child(picture).putFile(_image!);
-
-          // task.onComplete.then((snapshot) async{
-          //   imageUrl = await snapshot.ref.getDownloadUrl();
-          // });
-        } else{
-
-        }
-      } else{
-        //FlutterToast.showToast(msg: "You must select an image");
-      }
-    }
-  }
-}
+  
 
   // void _selectImage(Future<XFile?> pickImage, imageNumber) async{
   //   File tempImage = (await pickImage) as File;
@@ -419,3 +399,4 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
   
 
 
+}

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:teamp_app/screens/productDetailsScreen/ProductData.dart';
 
 import '../../components/productsIcon.dart';
 import '../../constants.dart';
+import '../../notifier/notifier.dart';
 import '../../sizeConfig.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -11,6 +13,9 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    ProductsNotifier productsNotifier = Provider.of<ProductsNotifier>(context, listen: false);
+    
     return Scaffold(
       body: Stack(
         children: [
@@ -57,12 +62,12 @@ class ProductDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ProductData(
-                    ProductOwner: "Product Owner",
-                    ProductPrice: "12345",
-                    ProductName: "Product Name",
-                    Description: "A brief Description dfcmiemkc  idcmdcmdscdc  djnscmxeicmecnemcoe,cxlskcoxmdsncsdcmosc,cmmcmcemckemcemcemcekm",
-                    PhoneNumber: "+2547123455678",
-                    Location: "Location",
+                    owner: productsNotifier.currentProducts.owner,
+                    price: productsNotifier.currentProducts.price,
+                    name: productsNotifier.currentProducts.name,
+                    description: productsNotifier.currentProducts.description,
+                    phoneNumber: "+2547123455678",
+                    location: productsNotifier.currentProducts.location,
                   ),
                   SizedBox(
                     height: getScreenHeight(20),

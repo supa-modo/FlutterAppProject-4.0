@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:teamp_app/constants.dart';
+import 'package:teamp_app/notifier/notifier.dart';
 import 'package:teamp_app/routes.dart';
 import 'package:teamp_app/screens/SignInScreen/signInScreen.dart';
 import 'package:teamp_app/screens/onBoardingScreen/onboardingScreen.dart';
@@ -12,7 +14,14 @@ import 'package:teamp_app/theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(
+      create: (BuildContext context) => ProductsNotifier(),
+        )
+      ],
+      child: MyApp(),
+    ),
+  ); 
 }
 
 class MyApp extends StatelessWidget {

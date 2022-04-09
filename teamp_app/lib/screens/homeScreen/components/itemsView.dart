@@ -1,22 +1,36 @@
 import "package:flutter/material.dart";
+import 'package:provider/provider.dart';
+import 'package:teamp_app/screens/PricesWebView/pricesWebView.dart';
 
 import '../../../components/defaultButton.dart';
 import '../../../components/sectionTitle.dart';
 import '../../../constants.dart';
+import '../../../net/api_methods.dart';
+import '../../../notifier/notifier.dart';
 import '../../../sizeConfig.dart';
 import '../../ImageViewScreen/imageView.dart';
 import '../../productDetailsScreen/productDetailsScreen.dart';
 
 class ItemsView extends StatefulWidget {
-  const ItemsView({Key? key}) : super(key: key);
 
   @override
   State<ItemsView> createState() => _ItemsViewState();
 }
 
 class _ItemsViewState extends State<ItemsView> {
+
+  @override
+  void initState() {
+    ProductsNotifier productsNotifier = Provider.of<ProductsNotifier>(context, listen: false);
+    getProducts(productsNotifier);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    ProductsNotifier productsNotifier = Provider.of<ProductsNotifier>(context);
+
     return Container(
       child: Column(children: [
         Padding(
@@ -25,7 +39,7 @@ class _ItemsViewState extends State<ItemsView> {
               child: Container(
                 decoration: BoxDecoration(
                     color: Colors.grey,
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage("assets/images/Vegetables.webp")),
                     borderRadius: BorderRadius.circular(getScreenWidth(18))),
@@ -39,7 +53,7 @@ class _ItemsViewState extends State<ItemsView> {
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: getScreenWidth(30), vertical: getScreenHeight(2)),
-            child: MarketPriceSellProduct(),
+            child: const MarketPriceSellProduct(),
           ),
         ),
         SizedBox(height: getScreenHeight(10)),
@@ -50,8 +64,8 @@ class _ItemsViewState extends State<ItemsView> {
         // SizedBox(height: getScreenHeight(1)),
           ListView.builder(
             shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 10,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: productsNotifier.productsList.length,
               itemBuilder: ((context, index) {
                 return Container(
                   margin: EdgeInsets.only(
@@ -61,7 +75,10 @@ class _ItemsViewState extends State<ItemsView> {
                   child: Row(children: [
                     //image section - not loading, pending fluter clean and pub get to try and solve
                     GestureDetector(
-                      onTap: () => Navigator.push(context,  MaterialPageRoute(builder: (context) => ProductDetails())),
+                      onTap: () {
+                        productsNotifier.currentProducts = productsNotifier.productsList[index];
+                        Navigator.push(context,  MaterialPageRoute(builder: (context) => const ProductDetails()));
+                      }, 
                       child: Container(
                           width: getScreenWidth(180),
                           height: getScreenHeight(140),
@@ -69,17 +86,17 @@ class _ItemsViewState extends State<ItemsView> {
                             borderRadius:
                                 BorderRadius.circular(getScreenWidth(17)),
                             //color: Colors.redAccent,
-                            image: DecorationImage(
+                            image: const DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage("assets/images/tomato.jpg")),
+                              image: const AssetImage("assets/images/tomato.jpg")),
                           ),),
                     ),
                     Expanded(
                       child: Container(
-                        height: getScreenHeight(120),
+                        height: getScreenHeight(125),
                         width: getScreenWidth(165),
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 243, 243, 243),
+                          color: const Color.fromARGB(255, 243, 243, 243),
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(getScreenWidth(15)),
                             bottomRight: Radius.circular(getScreenWidth(15)),
@@ -91,26 +108,50 @@ class _ItemsViewState extends State<ItemsView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                            Text("First Product",
+                              Text(productsNotifier.productsList[index].name,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: getScreenWidth(16),
                                     color: appPrimaryColor)),
-                            SizedBox(height: getScreenHeight(8)),
-                            Text(
-                              "A little description about the product shiklisjcjncacnakc djdcnisdmds",
-                              style: TextStyle(fontSize: getScreenWidth(12), color: Color.fromARGB(255, 73, 71, 71)),
+                            SizedBox(height: getScreenHeight(2)),
+                            Text('Kshs.' + productsNotifier.productsList[index].price,
+                                style: TextStyle(
+                                    fontSize: getScreenWidth(13),
+                                    color: Colors.red)),
+                            SizedBox(height: getScreenHeight(3)),
+                            Text(productsNotifier.productsList[index].description,
+                              style: TextStyle(fontSize: getScreenWidth(12), color: const Color.fromARGB(255, 73, 71, 71)),
                             ),
-                            SizedBox(height: getScreenHeight(10)),
+                            SizedBox(height: getScreenHeight(7)),
                             Row(
                               children: [
-                                Icon(Icons.account_circle_rounded, color: Color.fromARGB(255, 155, 173, 182), size: getScreenWidth(16),),
-                                Text("Product Owner", style: TextStyle(fontSize: getScreenWidth(11), color: Color.fromARGB(255, 221, 189, 48))),
+                                Icon(Icons.account_circle_rounded, color: const Color.fromARGB(255, 155, 173, 182), size: getScreenWidth(16),),
+                                Text(productsNotifier.productsList[index].owner, style: TextStyle(fontSize: getScreenWidth(12), color: const Color.fromARGB(255, 221, 189, 48))),
                                 SizedBox(width: getScreenWidth(15)),
-                                Icon(Icons.location_pin, color: Color.fromARGB(197, 247, 64, 64), size: getScreenWidth(16),),
-                                Text("Location", style: TextStyle(fontSize: getScreenWidth(11), color: Color.fromARGB(255, 104, 158, 252))),
+                                Icon(Icons.location_pin, color: const Color.fromARGB(197, 247, 64, 64), size: getScreenWidth(16),),
+                                Text(productsNotifier.productsList[index].location, style: TextStyle(fontSize: getScreenWidth(11), color: const Color.fromARGB(255, 104, 158, 252))),
                               ]
                             )
+                            // Text("First Product",
+                            //     style: TextStyle(
+                            //         fontWeight: FontWeight.bold,
+                            //         fontSize: getScreenWidth(16),
+                            //         color: appPrimaryColor)),
+                            // SizedBox(height: getScreenHeight(8)),
+                            // Text(
+                            //   "A little description about the product shiklisjcjncacnakc djdcnisdmds",
+                            //   style: TextStyle(fontSize: getScreenWidth(12), color: const Color.fromARGB(255, 73, 71, 71)),
+                            // ),
+                            // SizedBox(height: getScreenHeight(10)),
+                            // Row(
+                            //   children: [
+                            //     Icon(Icons.account_circle_rounded, color: const Color.fromARGB(255, 155, 173, 182), size: getScreenWidth(16),),
+                            //     Text("Product Owner", style: TextStyle(fontSize: getScreenWidth(11), color: const Color.fromARGB(255, 221, 189, 48))),
+                            //     SizedBox(width: getScreenWidth(15)),
+                            //     Icon(Icons.location_pin, color: const Color.fromARGB(197, 247, 64, 64), size: getScreenWidth(16),),
+                            //     Text("Location", style: TextStyle(fontSize: getScreenWidth(11), color: const Color.fromARGB(255, 104, 158, 252))),
+                            //   ]
+                            // )
                           ]),
                         ),
                       ),
@@ -160,23 +201,11 @@ class MarketPriceSellProduct extends StatelessWidget {
             ),
           ),
           onPressed: (){
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetails()),);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PricesWebView()),);
           },
         child: Text("Current Market Retail Prices", style: TextStyle(fontSize: getScreenWidth(17), color: Colors.white,)),
         ),
       ),
-        // DefaultButton(
-        //   text: "Sell Your Product",
-        //   pressed: () {
-        //     Navigator.pushNamed(context, ImageViewScreen.routeName);
-        //   },
-        // ),
-        // DefaultButton(
-        //   text: "Current Retail Market Prices",
-        //   pressed: () {
-
-        //   },
-        // )
       ],
     );
   }
