@@ -11,6 +11,8 @@ class Products{
   late String image;
   //late Timestamp createdAt;
 
+  Products();
+
   Products.fromMap(Map<String, dynamic> data){
     id = data['id'];
     name = data['name'];
@@ -21,5 +23,18 @@ class Products{
     phoneNumber = data['phoneNumber'];
     image = data['image'];
     //createdAt = data['createdAt'];
+  }
+
+  Map<String, dynamic> toMap(){
+    return {
+      'id': id,
+      'name': name,
+      'price': price,
+      'owner': owner,
+      'description': description,
+      'location': location,
+      'phoneNumber': phoneNumber,
+      'image': image,
+    };
   }
 }

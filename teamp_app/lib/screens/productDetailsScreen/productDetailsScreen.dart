@@ -29,7 +29,10 @@ class ProductDetails extends StatelessWidget {
                   //color: Colors.amberAccent,
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/tomato.jpg")),
+                      image: NetworkImage(
+                        productsNotifier.currentProducts!.image,
+                        
+                        )),
                 ),
               )),
           Positioned(
@@ -62,12 +65,12 @@ class ProductDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ProductData(
-                    owner: productsNotifier.currentProducts.owner,
-                    price: productsNotifier.currentProducts.price,
-                    name: productsNotifier.currentProducts.name,
-                    description: productsNotifier.currentProducts.description,
-                    phoneNumber: "+2547123455678",
-                    location: productsNotifier.currentProducts.location,
+                    owner: productsNotifier.currentProducts!.owner,
+                    price: productsNotifier.currentProducts!.price,
+                    name: productsNotifier.currentProducts!.name,
+                    description: productsNotifier.currentProducts!.description,
+                    phoneNumber: productsNotifier.currentProducts!.phoneNumber,
+                    location: productsNotifier.currentProducts!.location,
                   ),
                   SizedBox(
                     height: getScreenHeight(20),

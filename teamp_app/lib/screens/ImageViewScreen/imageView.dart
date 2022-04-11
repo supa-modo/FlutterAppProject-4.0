@@ -6,8 +6,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'package:teamp_app/net/api_methods.dart';
 
 import '../../constants.dart';
+import '../../models/products.dart';
+import '../../notifier/notifier.dart';
 import '../../sizeConfig.dart';
 import 'components/body.dart';
 
@@ -21,6 +25,23 @@ class ImageViewScreen extends StatefulWidget {
 
 class _ImageViewScreenState extends State<ImageViewScreen> {
   final _formKey = GlobalKey<FormState>();
+  Products? _currentProducts;
+  String? _imageUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    ProductsNotifier productsNotifier =
+        Provider.of<ProductsNotifier>(context, listen: false);
+
+    if (productsNotifier.currentProducts != null) {
+      _currentProducts = productsNotifier.currentProducts;
+    } else {
+      _currentProducts = Products();
+    }
+
+    _imageUrl = productsNotifier.currentProducts?.image;
+  }
 
   TextEditingController _productNameField = TextEditingController();
   TextEditingController _descriptionField = TextEditingController();
@@ -29,8 +50,6 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
   TextEditingController _nearestLocationField = TextEditingController();
 
   File? _image;
-  // File? _image2;
-  // File? _image3;
   final imagePicker = ImagePicker();
 
   Future imagePickerMethod() async {
@@ -50,6 +69,15 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
       duration: d,
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  saveProduct() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    _formKey.currentState!.save();
+
+    uploadProductsAndImage(_currentProducts!, _image!);
   }
 
   @override
@@ -101,7 +129,11 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                                                 padding: EdgeInsets.only(
                                                     top: getScreenHeight(5)),
                                                 child: Text(
-                                                    "Choose image to upload", style: TextStyle(color: Color.fromARGB(255, 128, 125, 125)),),
+                                                  "Choose image to upload",
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 128, 125, 125)),
+                                                ),
                                               ),
                                               SizedBox(
                                                   height: getScreenHeight(50)),
@@ -110,7 +142,8 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                                                   side: MaterialStateProperty
                                                       .all<BorderSide>(
                                                           BorderSide(
-                                                    color: Color.fromARGB(255, 235, 231, 231)
+                                                    color: Color.fromARGB(
+                                                            255, 235, 231, 231)
                                                         .withOpacity(0.5),
                                                     width: getScreenWidth(2.5),
                                                   )),
@@ -239,7 +272,9 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                   height: getScreenHeight(15),
                 ),
                 TextFormField(
-                    controller: _productNameField,
+                    onSaved: (value) {
+                      _currentProducts!.name = value!;
+                    },
                     textInputAction: TextInputAction.done,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
@@ -257,10 +292,35 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                       hintText: "Name of your product",
                     )),
                 SizedBox(
-                  height: getScreenHeight(20),
+                  height: getScreenHeight(15),
                 ),
                 TextFormField(
-                  controller: _descriptionField,
+                    onSaved: (value) {
+                      _currentProducts!.name = value!;
+                    },
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+                      enabledBorder: UnderlineInputBorder(),
+                      focusedBorder: UnderlineInputBorder(),
+                      border: UnderlineInputBorder(),
+                      labelStyle: TextStyle(
+                          fontSize: 20,
+                          color: appPrimaryColor,
+                          fontWeight: FontWeight.bold),
+                      hintStyle: TextStyle(fontSize: 12),
+                      labelText: "Your Name",
+                      hintText: "This will be displayed as the owner of the product",
+                    )),
+                    SizedBox(
+                  height: getScreenHeight(15),
+                ),
+                TextFormField(
+                  onSaved: (value) {
+                    _currentProducts!.description = value!;
+                  },
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.text,
                   decoration: const InputDecoration(
@@ -278,10 +338,12 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                       hintText: "Brief Description of your product"),
                 ),
                 SizedBox(
-                  height: getScreenHeight(20),
+                  height: getScreenHeight(15),
                 ),
                 TextFormField(
-                  controller: _productPriceField,
+                  onSaved: (value) {
+                    _currentProducts!.price = value!;
+                  },
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -299,10 +361,12 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                       hintText: "Price of your product"),
                 ),
                 SizedBox(
-                  height: getScreenHeight(20),
+                  height: getScreenHeight(15),
                 ),
                 TextFormField(
-                  controller: _phoneField,
+                  onSaved: (value) {
+                    _currentProducts!.phoneNumber = value!;
+                  },
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.phone,
                   decoration: const InputDecoration(
@@ -320,10 +384,12 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                       hintText: "Enter your contact details"),
                 ),
                 SizedBox(
-                  height: getScreenHeight(20),
+                  height: getScreenHeight(15),
                 ),
                 TextFormField(
-                  controller: _nearestLocationField,
+                  onSaved: (value) {
+                    _currentProducts!.location = value!;
+                  },
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.streetAddress,
                   decoration: const InputDecoration(
@@ -350,9 +416,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                         horizontal: getScreenWidth(50),
                         vertical: getScreenHeight(2)),
                     child: TextButton(
-                      onPressed: () {
-                        
-                      },
+                      onPressed: () => saveProduct(),
                       child: Text(
                         "Upload",
                         style: TextStyle(
@@ -379,8 +443,6 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
         ));
   }
 
-  
-
   // void _selectImage(Future<XFile?> pickImage, imageNumber) async{
   //   File tempImage = (await pickImage) as File;
   //   switch (ImageNumber){
@@ -392,11 +454,5 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
   //     break;
   //   }
   // }
-
-
-
-
-  
-
 
 }
