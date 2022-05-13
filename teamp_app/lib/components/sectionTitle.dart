@@ -21,7 +21,7 @@ class sectionTitleHeader extends StatelessWidget {
         children: [
           Text(text, style: TextStyle(fontSize: getScreenWidth(17), color: const Color.fromARGB(255, 34, 141, 52))),
           GestureDetector(
-            child: Text("See More", style: TextStyle(color: Color.fromARGB(255, 114, 168, 197), fontSize: getScreenWidth(14))),
+            child: Text("See More", style: TextStyle(color: const Color.fromARGB(255, 114, 168, 197), fontSize: getScreenWidth(14))),
             onTap: pressed,
           ),
         ]

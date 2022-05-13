@@ -43,12 +43,6 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
     _imageUrl = productsNotifier.currentProducts?.image;
   }
 
-  TextEditingController _productNameField = TextEditingController();
-  TextEditingController _descriptionField = TextEditingController();
-  TextEditingController _productPriceField = TextEditingController();
-  TextEditingController _phoneField = TextEditingController();
-  TextEditingController _nearestLocationField = TextEditingController();
-
   File? _image;
   final imagePicker = ImagePicker();
 

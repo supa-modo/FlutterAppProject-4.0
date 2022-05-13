@@ -7,7 +7,6 @@ import 'package:teamp_app/screens/onBoardingScreen/onboardingScreen.dart';
 import 'package:teamp_app/sizeConfig.dart';
 
 import '../../../components/socMediaIcons.dart';
-import '../../../components/svgIcons.dart';
 import '../signupForm.dart';
 
 class Body extends StatelessWidget {

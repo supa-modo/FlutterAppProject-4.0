@@ -38,7 +38,6 @@ class ProductDetails extends StatelessWidget {
           Positioned(
             top: 45,
             left: 20,
-            // right: 20,
             child: GestureDetector(
               onTap: () => Navigator.pop(context),
               child: ProductIcon(

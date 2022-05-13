@@ -30,6 +30,8 @@ uploadProductsAndImage(Products products, File imageFile) async{
 
     var fileExtension = path.extension(imageFile.path);
     var uuid = Uuid().v4;
+      
+
 
     final Reference storageRef = FirebaseStorage.instance.ref().child('products/images/$uuid$fileExtension');
 

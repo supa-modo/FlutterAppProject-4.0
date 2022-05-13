@@ -1,7 +1,5 @@
 import'package:flutter/material.dart';
 
-import '../sizeConfig.dart';
-
 class ProductIcon extends StatelessWidget {
   final IconData icon;
   final Color backgroundColor;
