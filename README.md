@@ -1,5 +1,5 @@
 # FlutterProject-4.0
-<img src="https://user-images.githubusercontent.com/90130111/168310967-936022da-b3f5-468a-a065-c6c0fabf1218.jpg" width="300px" height="400">
+<img src="https://user-images.githubusercontent.com/90130111/168310967-936022da-b3f5-468a-a065-c6c0fabf1218.jpg" width="auto" height="auto">
 ![Preview1](./assets/appImages/Screenshot_20220513_130459.jpg)
 ![Preview1](./assets/appImages/Screenshot_20220513_130513.jpg)
 ![Preview1](./assets/appImages/Screenshot_20220513_130459.jpg)
