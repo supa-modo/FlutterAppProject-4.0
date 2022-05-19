@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../components/progressIndicator.dart';
 import '../../constants.dart';
 
 class PricesWebView extends StatefulWidget {
@@ -57,18 +58,4 @@ class _PricesWebViewState extends State<PricesWebView> {
   }
 }
 
-class progressIndicator extends StatelessWidget {
-  const progressIndicator({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: CircularProgressIndicator(color: appPrimaryColor),
-      ),);
-  }
-}
 

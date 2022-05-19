@@ -25,15 +25,32 @@ class ProductDetails extends StatelessWidget {
               child: Container(
                 width: double.maxFinite,
                 height: 300,
-                decoration: BoxDecoration(
-                  //color: Colors.amberAccent,
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                        productsNotifier.currentProducts!.image,
-                        
-                        )),
-                ),
+                child: ClipRRect(
+                          borderRadius: BorderRadius.circular(getScreenWidth(17)),
+                          child: Image.network(
+                            productsNotifier.currentProducts!.image,
+                            fit: BoxFit.cover,
+                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              }
+                              return Center(
+                                child: SizedBox(
+                                  width: getScreenWidth(25),
+                                  height: getScreenHeight(25),
+                                  child: CircularProgressIndicator(
+                                    color: appPrimaryColor,
+                                    strokeWidth: 3.5,
+                                    backgroundColor: Color.fromARGB(255, 192, 192, 192),
+                                    value: loadingProgress.expectedTotalBytes != null? loadingProgress.cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!: null,
+
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
               )),
           Positioned(
             top: 45,
