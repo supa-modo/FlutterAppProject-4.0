@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:teamp_app/screens/homeScreen/components/body.dart';
 import 'package:teamp_app/screens/homeScreen/components/itemsView.dart';
 import 'package:teamp_app/screens/profileScreen/profileScreen.dart';
 
 import '../../components/counterIconButton.dart';
-import '../../constants.dart';
 import '../../sizeConfig.dart';
-import '../productDetailsScreen/productDetailsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routeName = "/homeScreen";
@@ -20,9 +16,14 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-                  margin: EdgeInsets.only(top: getScreenHeight(45), bottom: getScreenHeight(15), ),//left: getScreenWidth(10)),
+            margin: EdgeInsets.only(
+              top: getScreenHeight(45),
+              bottom: getScreenHeight(15),
+            ), //left: getScreenWidth(10)),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: getScreenWidth(20),),
+              padding: EdgeInsets.symmetric(
+                horizontal: getScreenWidth(20),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -36,13 +37,13 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              
-
             ),
           ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: ItemsView(),),)
+          Expanded(
+            child: SingleChildScrollView(
+              child: ItemsView(),
+            ),
+          )
         ],
       ),
       // bottomNavigationBar: Container(

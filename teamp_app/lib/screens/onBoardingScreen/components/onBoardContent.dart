@@ -5,7 +5,8 @@ import '../../../sizeConfig.dart';
 
 class OnboardContent extends StatelessWidget {
   const OnboardContent({
-    Key? key, this.text,
+    Key? key,
+    this.text,
   }) : super(key: key);
   final String? text; //****image
 
@@ -14,20 +15,22 @@ class OnboardContent extends StatelessWidget {
     return Column(
       children: [
         Spacer(),
-        Text("APP NAME",
-            style: TextStyle(
-              fontSize: getScreenWidth(36),
-              color: appPrimaryColor,
-              fontWeight: FontWeight.bold,
-            ),
+        Text(
+          "eSOKO",
+          style: TextStyle(
+            fontSize: getScreenWidth(36),
+            color: appPrimaryColor,
+            fontWeight: FontWeight.bold,
           ),
-        Text(text!, textAlign: TextAlign.center, style: const TextStyle(color: Colors.grey)),
+        ),
+        Text(text!,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Colors.grey)),
         Spacer(),
         // Image.asset("assets\images\splash_1.png",
         // height: 265,
 
         // ),
-
       ],
     );
   }

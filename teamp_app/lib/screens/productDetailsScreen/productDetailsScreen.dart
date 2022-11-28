@@ -44,7 +44,7 @@ class ProductDetails extends StatelessWidget {
                                     backgroundColor: Color.fromARGB(255, 192, 192, 192),
                                     value: loadingProgress.expectedTotalBytes != null? loadingProgress.cumulativeBytesLoaded /
                                             loadingProgress.expectedTotalBytes!: null,
-
+                                            
                                   ),
                                 ),
                               );

@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
 import 'package:teamp_app/screens/PricesWebView/pricesWebView.dart';
 
-import '../../../components/defaultButton.dart';
 import '../../../components/sectionTitle.dart';
 import '../../../constants.dart';
 import '../../../net/api_methods.dart';
@@ -84,18 +83,21 @@ class _ItemsViewState extends State<ItemsView> {
                                 builder: (context) => const ProductDetails()));
                       },
                       child: Container(
-                        width: getScreenWidth(180),
+                        width: getScreenWidth(174),
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 175, 175, 175),
-                          borderRadius: BorderRadius.circular(getScreenWidth(17)),
+                          color: Color.fromARGB(255, 202, 201, 201),
+                          borderRadius:
+                              BorderRadius.circular(getScreenWidth(17)),
                         ),
                         height: getScreenHeight(140),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(getScreenWidth(17)),
+                          borderRadius:
+                              BorderRadius.circular(getScreenWidth(17)),
                           child: Image.network(
                             productsNotifier.productsList[index].image,
                             fit: BoxFit.cover,
-                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent? loadingProgress) {
                               if (loadingProgress == null) {
                                 return child;
                               }
@@ -106,10 +108,14 @@ class _ItemsViewState extends State<ItemsView> {
                                   child: CircularProgressIndicator(
                                     color: appPrimaryColor,
                                     strokeWidth: 3.5,
-                                    backgroundColor: Color.fromARGB(255, 192, 192, 192),
-                                    value: loadingProgress.expectedTotalBytes != null? loadingProgress.cumulativeBytesLoaded /
-                                            loadingProgress.expectedTotalBytes!: null,
-
+                                    backgroundColor:
+                                        Color.fromARGB(255, 192, 192, 192),
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
                                   ),
                                 ),
                               );
@@ -120,7 +126,7 @@ class _ItemsViewState extends State<ItemsView> {
                     ),
                     Expanded(
                       child: Container(
-                        height: getScreenHeight(125),
+                        height: getScreenHeight(128),
                         width: getScreenWidth(165),
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 243, 243, 243),
@@ -142,9 +148,7 @@ class _ItemsViewState extends State<ItemsView> {
                                         color: appPrimaryColor)),
                                 SizedBox(height: getScreenHeight(2)),
                                 Text(
-                                    'Kshs.' +
-                                        productsNotifier
-                                            .productsList[index].price,
+                                    'Kshs.${productsNotifier.productsList[index].price}',
                                     style: TextStyle(
                                         fontSize: getScreenWidth(13),
                                         color: Colors.red)),

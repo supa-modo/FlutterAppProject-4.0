@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
 import '../../constants.dart';
-import '../../sizeConfig.dart';
-import '../homeScreen/homeScreen.dart';
 import 'components/body.dart';
 
 class ProfileScreen extends StatelessWidget {
   static String routeName = "/profileScreen";
-  const ProfileScreen({ Key? key }) : super(key: key);
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +12,9 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Profile"),
         centerTitle: true,
-        leading: IconButton(icon: const Icon(Icons.arrow_back_ios, color: appPrimaryColor),
-        onPressed: (){
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: appPrimaryColor),
+          onPressed: () {
             Navigator.of(context).pop();
           },
         ),
@@ -49,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
       //             )),
       //         IconButton(
       //             onPressed: () {
-                    
+
       //             },
       //             icon: Icon(
       //               Icons.notifications,

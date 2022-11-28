@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:teamp_app/net/flutterfire.dart';
 
@@ -11,20 +10,18 @@ import '../../sizeConfig.dart';
 import '../homeScreen/homeScreen.dart';
 
 class SignUpForm extends StatefulWidget {
-  SignUpForm({Key? key}) : super(key: key);
-
+  const SignUpForm({Key? key}) : super(key: key);
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-
-  TextEditingController _emailField = TextEditingController();
-  TextEditingController _nameField = TextEditingController();
-  TextEditingController _phoneNumberField = TextEditingController();
-  TextEditingController _passwordField = TextEditingController();
-  TextEditingController _confirmPasswordField = TextEditingController();
+  final TextEditingController _emailField = TextEditingController();
+  final TextEditingController _nameField = TextEditingController();
+  final TextEditingController _phoneNumberField = TextEditingController();
+  final TextEditingController _passwordField = TextEditingController();
+  final TextEditingController _confirmPasswordField = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
   late String name;
@@ -71,7 +68,8 @@ class _SignUpFormState extends State<SignUpForm> {
             // },
             textInputAction: TextInputAction.done,
             decoration: const InputDecoration(
-                labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+                labelStyle: TextStyle(
+                    fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
                 hintStyle: TextStyle(fontSize: 13),
                 labelText: "Confirm Password",
                 hintText: "Confirm Your Password",
@@ -87,7 +85,11 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(
             height: getScreenHeight(5),
           ),
-        const Text("**By pressing the Register button you agree to our terms and conditions**", style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic), textAlign: TextAlign.center,),
+          const Text(
+            "**By pressing the Register button you agree to our terms and conditions**",
+            style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic),
+            textAlign: TextAlign.center,
+          ),
           SizedBox(
             height: getScreenHeight(15),
           ),
@@ -95,22 +97,15 @@ class _SignUpFormState extends State<SignUpForm> {
             padding: EdgeInsets.symmetric(horizontal: getScreenWidth(75)),
             child: DefaultButton(
               text: "Register",
-              pressed: () async{
-                bool shouldNavigate = await signUp(_emailField.text, _passwordField.text, _confirmPasswordField.text);
-                if(formKey.currentState!.validate()){
-                  if(shouldNavigate){
-                  Navigator.pushNamed(context, HomeScreen.routeName);
+              pressed: () async {
+                bool shouldNavigate = await signUp(_emailField.text,
+                    _passwordField.text, _confirmPasswordField.text);
+                if (formKey.currentState!.validate()) {
+                  if (shouldNavigate) {
+                    Navigator.pushNamed(context, HomeScreen.routeName);
                   }
                   formKey.currentState!.save();
-                  
                 }
-                // } else{
-                //   SnackBar(content: Text("Please fix the errors first"));
-                // }
-                //FirebaseAuth.instance.createUserWithEmailAndPassword(email: , password: password)
-                // TODO
-                //--------------------------pending conditions for moving to next screen/ backend validation and sending to database etc-----------------------------------------------------------------------------
-                
               },
             ),
           ),
@@ -148,34 +143,35 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       controller: _passwordField,
       onSaved: (newValue) => password = newValue!,
-        validator: (value) {
-          if (value!.isEmpty && !errors.contains(nullPasswordError)){
-            setState(() {
-              errors.add(nullPasswordError);
-            });
-          } else if(value.length < 8 && !errors.contains(shortPasswordError)){
-            setState(() {
-              errors.add(shortPasswordError);
-            });
-          }
-          return null;
-        },
-        onChanged: (value) {
-          if (value.isNotEmpty && errors.contains(nullPasswordError)){
-            setState(() {
-              errors.remove(nullPasswordError);
-            });
-          } else if(value.length >= 8 && errors.contains(shortPasswordError)){
-            setState(() {
-              errors.remove(shortPasswordError);
-            });
-          }
-          return null;
-        },
+      validator: (value) {
+        if (value!.isEmpty && !errors.contains(nullPasswordError)) {
+          setState(() {
+            errors.add(nullPasswordError);
+          });
+        } else if (value.length < 8 && !errors.contains(shortPasswordError)) {
+          setState(() {
+            errors.add(shortPasswordError);
+          });
+        }
+        return null;
+      },
+      onChanged: (value) {
+        if (value.isNotEmpty && errors.contains(nullPasswordError)) {
+          setState(() {
+            errors.remove(nullPasswordError);
+          });
+        } else if (value.length >= 8 && errors.contains(shortPasswordError)) {
+          setState(() {
+            errors.remove(shortPasswordError);
+          });
+        }
+        return null;
+      },
       textInputAction: TextInputAction.next,
       obscureText: true,
       decoration: const InputDecoration(
-          labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+          labelStyle:
+              TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
           hintStyle: TextStyle(fontSize: 13),
           labelText: "Password",
           hintText: "Enter Your Password",
@@ -192,33 +188,35 @@ class _SignUpFormState extends State<SignUpForm> {
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
       onSaved: (newValue) => email = newValue!,
-      validator: (value){
-          if (value!.isEmpty && !errors.contains(nullEmailError)){
-            setState(() {
-              errors.add(nullEmailError);
-            });
-          } else if(!emailValidatorRegExp.hasMatch(value) && !errors.contains(invalidEmailEnteredError)){
-            setState(() {
-              errors.add(invalidEmailEnteredError);
-            });
-          }
-          return null;
-          
-        },
-        onChanged: (value){
-          if (value.isNotEmpty && errors.contains(nullEmailError)){
-            setState(() {
-              errors.remove(nullEmailError);
-            });
-          } else if(emailValidatorRegExp.hasMatch(value) && errors.contains(invalidEmailEnteredError)){
-            setState(() {
-              errors.remove(invalidEmailEnteredError);
-            });
-          }
-          return null;
-        },
+      validator: (value) {
+        if (value!.isEmpty && !errors.contains(nullEmailError)) {
+          setState(() {
+            errors.add(nullEmailError);
+          });
+        } else if (!emailValidatorRegExp.hasMatch(value) &&
+            !errors.contains(invalidEmailEnteredError)) {
+          setState(() {
+            errors.add(invalidEmailEnteredError);
+          });
+        }
+        return null;
+      },
+      onChanged: (value) {
+        if (value.isNotEmpty && errors.contains(nullEmailError)) {
+          setState(() {
+            errors.remove(nullEmailError);
+          });
+        } else if (emailValidatorRegExp.hasMatch(value) &&
+            errors.contains(invalidEmailEnteredError)) {
+          setState(() {
+            errors.remove(invalidEmailEnteredError);
+          });
+        }
+        return null;
+      },
       decoration: const InputDecoration(
-          labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+          labelStyle:
+              TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
           hintStyle: TextStyle(fontSize: 13),
           labelText: "Email",
           hintText: "Enter Your Email address",
@@ -229,7 +227,7 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-TextFormField phoneFormField() {
+  TextFormField phoneFormField() {
     return TextFormField(
       controller: _phoneNumberField,
       //----To save the value entered once it has logged in
@@ -237,7 +235,8 @@ TextFormField phoneFormField() {
       keyboardType: TextInputType.phone,
       textInputAction: TextInputAction.next,
       decoration: const InputDecoration(
-          labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+          labelStyle:
+              TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
           hintStyle: TextStyle(fontSize: 13),
           labelText: "Phone Number",
           hintText: "Enter Your Phone Number",
@@ -256,7 +255,8 @@ TextFormField phoneFormField() {
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
       decoration: const InputDecoration(
-          labelStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
+          labelStyle:
+              TextStyle(fontSize: 17, color: Color.fromARGB(255, 42, 45, 46)),
           hintStyle: TextStyle(fontSize: 13),
           labelText: "Name",
           hintText: "Enter Your Name",
@@ -266,7 +266,4 @@ TextFormField phoneFormField() {
           )),
     );
   }
-
 }
-
-  

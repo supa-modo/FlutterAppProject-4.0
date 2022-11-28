@@ -1,12 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:teamp_app/components/defaultButton.dart';
 import 'package:teamp_app/constants.dart';
-import 'package:teamp_app/screens/onBoardingScreen/onboardingScreen.dart';
 import 'package:teamp_app/sizeConfig.dart';
 
-import '../../../components/socMediaIcons.dart';
 import '../signupForm.dart';
 
 class Body extends StatelessWidget {
@@ -40,5 +35,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-

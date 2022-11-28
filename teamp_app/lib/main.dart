@@ -2,15 +2,10 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:teamp_app/constants.dart';
 import 'package:teamp_app/notifier/notifier.dart';
 import 'package:teamp_app/routes.dart';
-import 'package:teamp_app/screens/SignInScreen/signInScreen.dart';
 import 'package:teamp_app/screens/onBoardingScreen/onboardingScreen.dart';
-import 'package:teamp_app/screens/productDetailsScreen/productDetailsScreen.dart';
-import 'package:teamp_app/screens/profileScreen/profileScreen.dart';
 import 'package:teamp_app/theme.dart';
 
 void main() async {
@@ -18,24 +13,25 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-
-  runApp(MultiProvider(
-    providers: [ChangeNotifierProvider(
-      create: (BuildContext context) => ProductsNotifier(),
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) => ProductsNotifier(),
         )
       ],
       child: MyApp(),
     ),
-  ); 
+  );
 }
 
-class MyHttpOverrides extends HttpOverrides{
+class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context){
+  HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
-  
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +41,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme(),
@@ -55,11 +50,6 @@ class MyApp extends StatelessWidget {
       //initialRoute: ProfileScreen.routeName,
       // initialRoute: SignInScreen.routeName,
       routes: routes,
-      
     );
-    
   }
-
-  
 }
-

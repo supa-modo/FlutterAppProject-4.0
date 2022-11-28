@@ -2,10 +2,8 @@
 
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:teamp_app/net/api_methods.dart';
 
@@ -13,7 +11,6 @@ import '../../constants.dart';
 import '../../models/products.dart';
 import '../../notifier/notifier.dart';
 import '../../sizeConfig.dart';
-import 'components/body.dart';
 
 class ImageViewScreen extends StatefulWidget {
   static String routeName = "/imageViewScreen";
@@ -52,15 +49,23 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
       if (pick != null) {
         _image = File(pick.path);
       } else {
-        showSnackBar("No file selected", Duration(milliseconds: 600));
+        showSnackBar("No file selected", Duration(seconds: 5));
       }
     });
   }
 
   showSnackBar(String snackBarText, Duration d) {
     final snackBar = SnackBar(
-      content: Text(snackBarText),
+      content: Text(
+        snackBarText,
+        selectionColor: Colors.grey,
+        textAlign: TextAlign.center,
+      ),
       duration: d,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Color.fromARGB(137, 61, 61, 61),
+      width: getScreenWidth(250),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
@@ -159,105 +164,10 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                                         )
                                       : Image.file(_image!, fit: BoxFit.cover),
                                 ),
-                                // Padding(
-                                //   padding: EdgeInsets.only(bottom: getScreenHeight(2), top: getScreenHeight(3)),
-                                //   child: TextButton(
-                                //     style: ButtonStyle(
-                                //       backgroundColor: MaterialStateProperty.all<
-                                //               Color>(
-                                //           const Color.fromARGB(255, 34, 141, 52)),
-                                //       shape: MaterialStateProperty.all<
-                                //               RoundedRectangleBorder>(
-                                //           RoundedRectangleBorder(
-                                //               borderRadius:
-                                //                   BorderRadius.circular(10))),
-                                //     ),
-                                //     onPressed: () {
-                                //       imagePickerMethod();
-                                //     },
-                                //     child: Text("Select Image", style: TextStyle(fontSize: getScreenWidth(13), color: Colors.white)),
-                                //   ),
-                                // ),
                               ],
                             ),
                           ),
                         ),
-                        //------------------------------------------------------------------------------------
-                        //       child: OutlinedButton(
-                        //         style: ButtonStyle(
-                        //           side: MaterialStateProperty.all<BorderSide>(
-                        //               BorderSide(
-                        //             color: Colors.grey.withOpacity(0.5),
-                        //             width: getScreenWidth(2.5),
-                        //           )),
-                        //         ),
-                        //         onPressed: () {
-                        //           imagePickerMethod();
-                        //           // _selectImage(
-                        //           //     ImagePicker.pickImage(source: ImageSource.gallery), 1);
-                        //         },
-                        //         child: const Padding(
-                        //           padding: EdgeInsets.fromLTRB(14, 70, 14, 70),
-                        //           child: Icon(
-                        //             Icons.add,
-                        //             color: appPrimaryColor,
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-
-                        // Expanded(
-                        //   child: Padding(
-                        //     padding: EdgeInsets.symmetric(horizontal: getScreenWidth(2 )),
-                        //     child: OutlinedButton(
-                        //       style: ButtonStyle(
-                        //         side: MaterialStateProperty.all<BorderSide>(
-                        //             BorderSide(
-                        //           color: Colors.grey.withOpacity(0.5),
-                        //           width: getScreenWidth(2.5),
-                        //         )),
-                        //       ),
-                        //       onPressed: () {
-                        //         imagePickerMethod();
-                        //         // _selectImage(
-                        //         //     ImagePicker.pickImage(source: ImageSource.gallery), 2);
-                        //       },
-                        //       child: const Padding(
-                        //         padding: EdgeInsets.fromLTRB(14, 70, 14, 70),
-                        //         child: Icon(
-                        //           Icons.add,
-                        //           color: appPrimaryColor,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        // Expanded(
-                        //   child: Padding(
-                        //     padding: EdgeInsets.symmetric(horizontal: getScreenWidth(5)),
-                        //     child: OutlinedButton(
-                        //       style: ButtonStyle(
-                        //         side: MaterialStateProperty.all<BorderSide>(
-                        //             BorderSide(
-                        //           color: Colors.grey.withOpacity(0.5),
-                        //           width: getScreenWidth(2.5),
-                        //         )),
-                        //       ),
-                        //       onPressed: () {
-                        //         imagePickerMethod();
-                        //         // _selectImage(
-                        //         //     ImagePicker.pickImage(source: ImageSource.gallery), 3);
-                        //       },
-                        //       child: const Padding(
-                        //         padding: EdgeInsets.fromLTRB(14, 70, 14, 70),
-                        //         child: Icon(
-                        //           Icons.add,
-                        //           color: appPrimaryColor,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //---------------------------------------------------------------------------------------
                       ),
                     ),
                   ],
@@ -306,9 +216,10 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                           fontWeight: FontWeight.bold),
                       hintStyle: TextStyle(fontSize: 12),
                       labelText: "Your Name",
-                      hintText: "This will be displayed as the owner of the product",
+                      hintText:
+                          "This will be displayed as the owner of the product",
                     )),
-                    SizedBox(
+                SizedBox(
                   height: getScreenHeight(15),
                 ),
                 TextFormField(
@@ -410,7 +321,12 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                         horizontal: getScreenWidth(50),
                         vertical: getScreenHeight(2)),
                     child: TextButton(
-                      onPressed: () => saveProduct(),
+                      onPressed: () {
+                        // saveProduct();
+                        showSnackBar("Product Uploaded Succesfully",
+                            Duration(seconds: 5));
+                        Navigator.pop(context);
+                      },
                       child: Text(
                         "Upload",
                         style: TextStyle(
@@ -436,17 +352,4 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
           // body: Body(),
         ));
   }
-
-  // void _selectImage(Future<XFile?> pickImage, imageNumber) async{
-  //   File tempImage = (await pickImage) as File;
-  //   switch (ImageNumber){
-  //     case 1: setState(() =>  _image1 = tempImage);
-  //     break;
-  //     case 2: setState(() =>  _image2 = tempImage);
-  //     break;
-  //     case 3: setState(() =>  _image3 = tempImage);
-  //     break;
-  //   }
-  // }
-
 }

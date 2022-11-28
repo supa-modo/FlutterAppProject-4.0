@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:io';
 import 'package:path/path.dart' as path;
 import 'package:firebase_storage/firebase_storage.dart';
@@ -44,10 +43,11 @@ uploadProductsAndImage(Products products, File imageFile) async {
 }
 
 _uploadProducts(Products products, {String? imageUrl}) async {
-  CollectionReference productsRef =
+  CollectionReference snapshot =
       FirebaseFirestore.instance.collection('Products');
 
   if (imageUrl != null) {
     products.image = imageUrl;
   }
+  
 }

@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class Products{
+class Products {
   late String id;
   late String name;
   late String price;
@@ -13,7 +11,7 @@ class Products{
 
   Products();
 
-  Products.fromMap(Map<String, dynamic> data){
+  Products.fromMap(Map<String, dynamic> data) {
     id = data['id'];
     name = data['name'];
     price = data['price'];
@@ -25,7 +23,7 @@ class Products{
     //createdAt = data['createdAt'];
   }
 
-  Map<String, dynamic> toMap(){
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
