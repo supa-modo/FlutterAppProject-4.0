@@ -43,8 +43,7 @@ class _PricesWebViewState extends State<PricesWebView> {
                 "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0",
             javascriptMode: JavascriptMode.unrestricted,
             initialUrl: 'kamis.kilimo.go.ke',
-            // initialUrl: 'amis.co.ke/site/market',
-            // initialUrl: 'amis.co.ke',
+            
             onPageStarted: startLoading,
             onPageFinished: doneLoading,
             onWebViewCreated: (WebViewController webViewController) {

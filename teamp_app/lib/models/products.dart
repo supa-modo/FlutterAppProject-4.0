@@ -1,5 +1,5 @@
 class Products {
-  late String id;
+  // late String id;
   late String name;
   late String price;
   late String owner;
@@ -12,7 +12,7 @@ class Products {
   Products();
 
   Products.fromMap(Map<String, dynamic> data) {
-    id = data['id'];
+    // id = data['id'];
     name = data['name'];
     price = data['price'];
     owner = data['owner'];
@@ -25,7 +25,7 @@ class Products {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      // 'id': id,
       'name': name,
       'price': price,
       'owner': owner,

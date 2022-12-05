@@ -23,31 +23,39 @@ getProducts(ProductsNotifier productsNotifier) async {
   productsNotifier.productsList = _productsList;
 }
 
-uploadProductsAndImage(Products products, File imageFile) async {
-  if (imageFile != null) {
+uploadProductsAndImage(Products products, File localFile) async {
+  if (localFile != null) {
     print('Uploading image');
 
-    var fileExtension = path.extension(imageFile.path);
-    var uuid = Uuid().v4;
+    var fileExtension = path.extension(localFile.path);
+    print(fileExtension);
+    var uuid = Uuid().v4();
 
     final Reference storageRef = FirebaseStorage.instance
         .ref()
         .child('products/images/$uuid$fileExtension');
 
-    await storageRef.putFile(imageFile);
+    await storageRef.putFile(localFile);
 
     String url = await storageRef.getDownloadURL();
-    print("Download url: $url");
+    print("downloadUrl: $url");
     _uploadProducts(products, imageUrl: url);
+  } else {
+    print("Skipping product image upload");
   }
 }
 
 _uploadProducts(Products products, {String? imageUrl}) async {
-  CollectionReference snapshot =
+  CollectionReference productsRef =
       FirebaseFirestore.instance.collection('Products');
 
   if (imageUrl != null) {
     products.image = imageUrl;
   }
-  
+
+  DocumentReference documentRef = await productsRef.add(products.toMap());
+  // products.id = documentRef.id;
+
+  print("Uploaded product successfully: ${products.toString()}");
+  await documentRef.set(products.toMap(), SetOptions(merge: true));
 }

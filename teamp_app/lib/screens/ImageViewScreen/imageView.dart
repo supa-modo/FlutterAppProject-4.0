@@ -1,5 +1,3 @@
-//import 'dart:html';
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -11,19 +9,21 @@ import '../../constants.dart';
 import '../../models/products.dart';
 import '../../notifier/notifier.dart';
 import '../../sizeConfig.dart';
+import '../homeScreen/homeScreen.dart';
 
 class ImageViewScreen extends StatefulWidget {
   static String routeName = "/imageViewScreen";
-  ImageViewScreen({Key? key}) : super(key: key);
+  const ImageViewScreen({Key? key}) : super(key: key);
 
   @override
   State<ImageViewScreen> createState() => _ImageViewScreenState();
 }
 
 class _ImageViewScreenState extends State<ImageViewScreen> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Products? _currentProducts;
   String? _imageUrl;
+  File? _imageFile;
 
   @override
   void initState() {
@@ -40,14 +40,13 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
     _imageUrl = productsNotifier.currentProducts?.image;
   }
 
-  File? _image;
   final imagePicker = ImagePicker();
 
   Future imagePickerMethod() async {
     final pick = await imagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       if (pick != null) {
-        _image = File(pick.path);
+        _imageFile = File(pick.path);
       } else {
         showSnackBar("No file selected", Duration(seconds: 5));
       }
@@ -76,7 +75,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
     }
     _formKey.currentState!.save();
 
-    uploadProductsAndImage(_currentProducts!, _image!);
+    uploadProductsAndImage(_currentProducts!, _imageFile!);
   }
 
   @override
@@ -99,6 +98,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
         ),
         body: Form(
           key: _formKey,
+          autovalidateMode: AutovalidateMode.always,
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -120,7 +120,7 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                  child: _image == null
+                                  child: _imageFile == null
                                       ? Center(
                                           child: Column(
                                             children: [
@@ -160,9 +160,10 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                                                 ),
                                               )
                                             ],
-                                          ), //Text("No image selected"),
+                                          ),
                                         )
-                                      : Image.file(_image!, fit: BoxFit.cover),
+                                      : Image.file(_imageFile!,
+                                          fit: BoxFit.cover),
                                 ),
                               ],
                             ),
@@ -181,6 +182,12 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                     },
                     textInputAction: TextInputAction.done,
                     keyboardType: TextInputType.text,
+                    validator: ((value) {
+                      if (value!.isEmpty) {
+                        return 'Product name cannot be empty';
+                      }
+                      return null;
+                    }),
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 2, vertical: 5),
@@ -193,17 +200,22 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                           fontWeight: FontWeight.bold),
                       hintStyle: TextStyle(fontSize: 12),
                       labelText: "Product Name",
-                      hintText: "Name of your product",
                     )),
                 SizedBox(
                   height: getScreenHeight(15),
                 ),
                 TextFormField(
                     onSaved: (value) {
-                      _currentProducts!.name = value!;
+                      _currentProducts!.owner = value!;
                     },
                     textInputAction: TextInputAction.done,
                     keyboardType: TextInputType.text,
+                    validator: ((value) {
+                      if (value!.isEmpty) {
+                        return 'Product name cannot be empty';
+                      }
+                      return null;
+                    }),
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 2, vertical: 5),
@@ -216,8 +228,6 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                           fontWeight: FontWeight.bold),
                       hintStyle: TextStyle(fontSize: 12),
                       labelText: "Your Name",
-                      hintText:
-                          "This will be displayed as the owner of the product",
                     )),
                 SizedBox(
                   height: getScreenHeight(15),
@@ -228,19 +238,25 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                   },
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.text,
+                  validator: ((value) {
+                    if (value!.isEmpty) {
+                      return 'Product name cannot be empty';
+                    }
+                    return null;
+                  }),
                   decoration: const InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-                      enabledBorder: UnderlineInputBorder(),
-                      focusedBorder: UnderlineInputBorder(),
-                      border: UnderlineInputBorder(),
-                      labelStyle: TextStyle(
-                          fontSize: 20,
-                          color: appPrimaryColor,
-                          fontWeight: FontWeight.bold),
-                      hintStyle: TextStyle(fontSize: 12),
-                      labelText: "Product Description",
-                      hintText: "Brief Description of your product"),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+                    enabledBorder: UnderlineInputBorder(),
+                    focusedBorder: UnderlineInputBorder(),
+                    border: UnderlineInputBorder(),
+                    labelStyle: TextStyle(
+                        fontSize: 20,
+                        color: appPrimaryColor,
+                        fontWeight: FontWeight.bold),
+                    hintStyle: TextStyle(fontSize: 12),
+                    labelText: "Product Description",
+                  ),
                 ),
                 SizedBox(
                   height: getScreenHeight(15),
@@ -251,19 +267,25 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                   },
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.number,
+                  validator: ((value) {
+                    if (value!.isEmpty) {
+                      return 'Price cannot be empty';
+                    }
+                    return null;
+                  }),
                   decoration: const InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-                      enabledBorder: UnderlineInputBorder(),
-                      focusedBorder: UnderlineInputBorder(),
-                      border: UnderlineInputBorder(),
-                      labelStyle: TextStyle(
-                          fontSize: 20,
-                          color: appPrimaryColor,
-                          fontWeight: FontWeight.bold),
-                      hintStyle: TextStyle(fontSize: 12),
-                      labelText: "Product Price",
-                      hintText: "Price of your product"),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+                    enabledBorder: UnderlineInputBorder(),
+                    focusedBorder: UnderlineInputBorder(),
+                    border: UnderlineInputBorder(),
+                    labelStyle: TextStyle(
+                        fontSize: 20,
+                        color: appPrimaryColor,
+                        fontWeight: FontWeight.bold),
+                    hintStyle: TextStyle(fontSize: 12),
+                    labelText: "Product Price",
+                  ),
                 ),
                 SizedBox(
                   height: getScreenHeight(15),
@@ -274,19 +296,28 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                   },
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.phone,
+                  validator: ((value) {
+                    if (value!.isEmpty) {
+                      return 'Phone number cannot be empty';
+                    }
+                    if (value.length < 10) {
+                      return 'Enter a valid phone number';
+                    }
+                    return null;
+                  }),
                   decoration: const InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-                      enabledBorder: UnderlineInputBorder(),
-                      focusedBorder: UnderlineInputBorder(),
-                      border: UnderlineInputBorder(),
-                      labelStyle: TextStyle(
-                          fontSize: 20,
-                          color: appPrimaryColor,
-                          fontWeight: FontWeight.bold),
-                      hintStyle: TextStyle(fontSize: 12),
-                      labelText: "Your Phone Number",
-                      hintText: "Enter your contact details"),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+                    enabledBorder: UnderlineInputBorder(),
+                    focusedBorder: UnderlineInputBorder(),
+                    border: UnderlineInputBorder(),
+                    labelStyle: TextStyle(
+                        fontSize: 20,
+                        color: appPrimaryColor,
+                        fontWeight: FontWeight.bold),
+                    hintStyle: TextStyle(fontSize: 12),
+                    labelText: "Your Phone Number",
+                  ),
                 ),
                 SizedBox(
                   height: getScreenHeight(15),
@@ -297,19 +328,25 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                   },
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.streetAddress,
+                  validator: ((value) {
+                    if (value!.isEmpty) {
+                      return 'Nearest location cannot be empty';
+                    }
+                    return null;
+                  }),
                   decoration: const InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-                      enabledBorder: UnderlineInputBorder(),
-                      focusedBorder: UnderlineInputBorder(),
-                      // border: UnderlineInputBorder(),
-                      labelStyle: TextStyle(
-                          fontSize: 20,
-                          color: appPrimaryColor,
-                          fontWeight: FontWeight.bold),
-                      hintStyle: TextStyle(fontSize: 12),
-                      labelText: "Nearest Location",
-                      hintText: "Location of your product"),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+                    enabledBorder: UnderlineInputBorder(),
+                    focusedBorder: UnderlineInputBorder(),
+                    border: UnderlineInputBorder(),
+                    labelStyle: TextStyle(
+                        fontSize: 20,
+                        color: appPrimaryColor,
+                        fontWeight: FontWeight.bold),
+                    hintStyle: TextStyle(fontSize: 12),
+                    labelText: "Nearest Location",
+                  ),
                 ),
                 SizedBox(
                   height: getScreenHeight(15),
@@ -322,10 +359,10 @@ class _ImageViewScreenState extends State<ImageViewScreen> {
                         vertical: getScreenHeight(2)),
                     child: TextButton(
                       onPressed: () {
-                        // saveProduct();
+                        saveProduct();
                         showSnackBar("Product Uploaded Succesfully",
                             Duration(seconds: 5));
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, HomeScreen.routeName);
                       },
                       child: Text(
                         "Upload",
